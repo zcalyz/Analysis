@@ -1,0 +1,83 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building com.zc Maven Webapp 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ analysis.center ---
+[INFO] com.zc:analysis.center:war:0.0.1-SNAPSHOT
+[INFO] +- junit:junit:jar:4.11:test
+[INFO] |  \- org.hamcrest:hamcrest-core:jar:1.3:test
+[INFO] +- org.springframework:spring-core:jar:4.0.2.RELEASE:compile
+[INFO] +- org.springframework:spring-web:jar:4.0.2.RELEASE:compile
+[INFO] |  +- org.springframework:spring-beans:jar:4.0.2.RELEASE:compile
+[INFO] |  \- org.springframework:spring-context:jar:4.0.2.RELEASE:compile
+[INFO] +- org.springframework:spring-oxm:jar:4.0.2.RELEASE:compile
+[INFO] +- org.springframework:spring-tx:jar:4.0.2.RELEASE:compile
+[INFO] +- org.springframework:spring-jdbc:jar:4.0.2.RELEASE:compile
+[INFO] +- org.springframework:spring-webmvc:jar:4.0.2.RELEASE:compile
+[INFO] |  \- org.springframework:spring-expression:jar:4.0.2.RELEASE:compile
+[INFO] +- org.springframework:spring-aop:jar:4.0.2.RELEASE:compile
+[INFO] |  \- aopalliance:aopalliance:jar:1.0:compile
+[INFO] +- org.springframework:spring-context-support:jar:4.0.2.RELEASE:compile
+[INFO] +- org.springframework:spring-test:jar:4.0.2.RELEASE:compile
+[INFO] +- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13:compile
+[INFO] |  \- org.codehaus.jackson:jackson-core-asl:jar:1.9.13:compile
+[INFO] +- org.mybatis:mybatis:jar:3.2.6:compile
+[INFO] +- org.mybatis:mybatis-spring:jar:1.2.2:compile
+[INFO] +- javax:javaee-api:jar:7.0:compile
+[INFO] |  \- com.sun.mail:javax.mail:jar:1.5.0:compile
+[INFO] |     \- javax.activation:activation:jar:1.1:compile
+[INFO] +- mysql:mysql-connector-java:jar:5.1.30:compile
+[INFO] +- commons-dbcp:commons-dbcp:jar:1.2.2:compile
+[INFO] |  \- commons-pool:commons-pool:jar:1.3:compile
+[INFO] +- commons-logging:commons-logging:jar:1.2:compile
+[INFO] +- jstl:jstl:jar:1.2:compile
+[INFO] +- com.alibaba:dubbo:jar:2.5.3:compile
+[INFO] |  \- org.javassist:javassist:jar:3.15.0-GA:compile
+[INFO] +- org.apache.zookeeper:zookeeper:jar:3.3.6:compile
+[INFO] |  \- jline:jline:jar:0.9.94:compile
+[INFO] +- com.github.sgroschupf:zkclient:jar:0.1:compile
+[INFO] |  \- log4j:log4j:jar:1.2.14:compile
+[INFO] +- com.zc:analysis.shared:jar:0.0.2-SNAPSHOT:compile
+[INFO] +- org.elasticsearch:elasticsearch:jar:2.3.5:compile
+[INFO] |  +- org.apache.lucene:lucene-core:jar:5.5.0:compile
+[INFO] |  +- org.apache.lucene:lucene-backward-codecs:jar:5.5.0:compile
+[INFO] |  +- org.apache.lucene:lucene-analyzers-common:jar:5.5.0:compile
+[INFO] |  +- org.apache.lucene:lucene-queries:jar:5.5.0:compile
+[INFO] |  +- org.apache.lucene:lucene-memory:jar:5.5.0:compile
+[INFO] |  +- org.apache.lucene:lucene-highlighter:jar:5.5.0:compile
+[INFO] |  +- org.apache.lucene:lucene-queryparser:jar:5.5.0:compile
+[INFO] |  |  \- org.apache.lucene:lucene-sandbox:jar:5.5.0:compile
+[INFO] |  +- org.apache.lucene:lucene-suggest:jar:5.5.0:compile
+[INFO] |  |  \- org.apache.lucene:lucene-misc:jar:5.5.0:compile
+[INFO] |  +- org.apache.lucene:lucene-join:jar:5.5.0:compile
+[INFO] |  |  \- org.apache.lucene:lucene-grouping:jar:5.5.0:compile
+[INFO] |  +- org.apache.lucene:lucene-spatial:jar:5.5.0:compile
+[INFO] |  |  +- org.apache.lucene:lucene-spatial3d:jar:5.5.0:compile
+[INFO] |  |  \- com.spatial4j:spatial4j:jar:0.5:compile
+[INFO] |  +- com.google.guava:guava:jar:18.0:compile
+[INFO] |  +- org.elasticsearch:securesm:jar:1.0:compile
+[INFO] |  +- com.carrotsearch:hppc:jar:0.7.1:compile
+[INFO] |  +- joda-time:joda-time:jar:2.9.4:compile
+[INFO] |  +- org.joda:joda-convert:jar:1.2:compile
+[INFO] |  +- com.fasterxml.jackson.core:jackson-core:jar:2.6.6:compile
+[INFO] |  +- com.fasterxml.jackson.dataformat:jackson-dataformat-smile:jar:2.6.6:compile
+[INFO] |  +- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.6.6:compile
+[INFO] |  |  \- org.yaml:snakeyaml:jar:1.15:compile
+[INFO] |  +- com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:jar:2.6.6:compile
+[INFO] |  +- io.netty:netty:jar:3.10.5.Final:compile
+[INFO] |  +- com.ning:compress-lzf:jar:1.0.2:compile
+[INFO] |  +- com.tdunning:t-digest:jar:3.0:compile
+[INFO] |  +- org.hdrhistogram:HdrHistogram:jar:2.1.6:compile
+[INFO] |  +- commons-cli:commons-cli:jar:1.3.1:compile
+[INFO] |  \- com.twitter:jsr166e:jar:1.1.0:compile
+[INFO] +- org.slf4j:slf4j-api:jar:1.7.12:compile
+[INFO] \- org.slf4j:slf4j-log4j12:jar:1.7.12:compile
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.657 s
+[INFO] Finished at: 2016-11-24T16:04:53+08:00
+[INFO] Final Memory: 17M/310M
+[INFO] ------------------------------------------------------------------------
