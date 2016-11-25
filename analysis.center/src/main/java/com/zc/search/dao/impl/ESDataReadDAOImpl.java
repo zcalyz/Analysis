@@ -1,4 +1,4 @@
-package com.zc.es.service.impl;
+package com.zc.search.dao.impl;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -10,11 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zc.constant.AddressConstant;
+import com.zc.search.dao.SourceDataReadDAO;
+import com.zc.search.param.BaseSearchParam;
 import com.zc.util.PropertyFileReadUtil;
 
-public class ESSimpleReaderServiceImpl {
+public class ESDataReadDAOImpl implements SourceDataReadDAO{
 
-	private static Logger logger = LoggerFactory.getLogger(ESSimpleReaderServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(ESDataReadDAOImpl.class);
 
 	private TransportClient getESClient() {
 		TransportClient client = TransportClient.builder().build();
@@ -31,6 +33,12 @@ public class ESSimpleReaderServiceImpl {
 		}
 
 		return client;
+	}
+
+	@Override
+	public void searchData(BaseSearchParam searchParam) {
+		
+		
 	}
 	
 }

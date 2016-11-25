@@ -18,15 +18,21 @@ import org.slf4j.LoggerFactory;
 public class PropertyFileReadUtil {
 	
 	private static Logger logger = LoggerFactory.getLogger(PropertyFileReadUtil.class);
+	
 	/**
 	 * 储存address.properties 中的配置
 	 */
 	private static Map<String, String> addressMap;
+	
+	/**
+	 * address.properties文件的位置
+	 */
+	private static final String ADDRESS_FILE_LOCATION = "properties/address.properties";
 
 	public static Map<String, String> getAddressMap() {
 		if (addressMap == null) {
 			addressMap = new HashMap<String, String>();
-			Properties properties = loadFileInProperties("properties/address.properties");
+			Properties properties = loadFileInProperties(ADDRESS_FILE_LOCATION);
 			
 			initMapByPropeties(properties, addressMap);
 		}
