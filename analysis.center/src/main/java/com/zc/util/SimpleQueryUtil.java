@@ -3,9 +3,13 @@ package com.zc.util;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
-
 import com.zc.search.param.es.SimpleSearchParam;
 
+/**
+ * 常用查询语句
+ * @author zhaichen
+ *
+ */
 public class SimpleQueryUtil {
 
 	/**
@@ -59,7 +63,7 @@ public class SimpleQueryUtil {
 	}
 	
 	/**
-	 * 根据指定字段排序呢
+	 * 根据指定字段排序
 	 * @param searchRequest
 	 * @param filedName
 	 * @param sortOrder
