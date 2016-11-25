@@ -36,9 +36,10 @@ public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
 		SearchRequestBuilder searchRequest = initBaseSearchQuery(esClient, searchParam);
 
 		// 拼接查询语句
-		SimpleQueryUtil.addTermQueryForName(searchRequest, simpleSearchParam);
-		SimpleQueryUtil.addRangeQueryForAge(searchRequest, simpleSearchParam);
-		SimpleQueryUtil.addSortField(searchRequest, "age", SortOrder.DESC);
+//		SimpleQueryUtil.addTermQueryForName(searchRequest, simpleSearchParam);
+		SimpleQueryUtil.addRangeQueryForCreateTime(searchRequest, simpleSearchParam);
+//		SimpleQueryUtil.addRangeQueryForAge(searchRequest, simpleSearchParam);
+//		SimpleQueryUtil.addSortField(searchRequest, "age", SortOrder.DESC);
 		// SimpleQueryUtil.addMatchQueryForName(searchRequest, simpleSearchParam);
 
 		// setFrom，从哪一个Score开始查

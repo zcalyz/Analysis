@@ -1,5 +1,7 @@
 package com.zc.search.param.es;
 
+import java.util.Date;
+
 import com.zc.search.param.BaseESSearchParam;
 
 public class SimpleSearchParam extends BaseESSearchParam{
@@ -15,6 +17,16 @@ public class SimpleSearchParam extends BaseESSearchParam{
 	private int startAge;
 	
 	private int endAge;
+	
+	/**
+	 *  查询起始时间
+	 */
+	private Date startTime;
+	
+	/**
+	 * 查询结束时间
+	 */
+	private Date endTime;
 
 
 	public String getAddress() {
@@ -48,4 +60,29 @@ public class SimpleSearchParam extends BaseESSearchParam{
 	public void setEndAge(int endAge) {
 		this.endAge = endAge;
 	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	
 }

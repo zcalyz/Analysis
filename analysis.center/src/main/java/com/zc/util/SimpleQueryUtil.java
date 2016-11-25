@@ -31,6 +31,16 @@ public class SimpleQueryUtil {
 	}
 	
 	/**
+	 * 时间段范围查询 需要转化为long型
+	 * @param searchRequest
+	 * @param searchParam
+	 */
+	public static void addRangeQueryForCreateTime(SearchRequestBuilder searchRequest, SimpleSearchParam searchParam) {
+		searchRequest.setPostFilter(QueryBuilders.rangeQuery("creatTime").from(searchParam.getStartTime().getTime())
+				.to(searchParam.getEndTime().getTime()));
+	}
+	
+	/**
 	 * wildcard 支持通配符
 	 * @param searchRequest
 	 * @param searchParam
