@@ -1,8 +1,8 @@
 
 <div class="col-sm-3 col-md-2 sidebar">
 	<ul class="nav nav-sidebar">
-		<li class="active"><a href="#">Overview</a></li>
-		<li><a href="#">Reports</a></li>
+		<li id="li_main" class="active"><a href="main.jsp?active_li=li_main">Overview</a></li>
+		<li id="li_panel"><a href="panel.jsp?active_li=li_panel">panel</a></li>
 		<li><a href="#">Analytics</a></li>
 		<li><a href="#">Export</a></li>
 	</ul>
@@ -19,3 +19,14 @@
 		<li><a href="">Another nav item</a></li>
 	</ul>
 </div>
+
+<input id="active_li_id" type="text" value="<%=request.getParameter("active_li") %>"></input>
+
+<script>
+	var activeLi = $("#active_li_id").val();
+
+	if (activeLi != "li_main") {
+		$("#li_main").removeClass("active");
+		$("#" + activeLi + "").addClass("active");
+	}
+</script>
