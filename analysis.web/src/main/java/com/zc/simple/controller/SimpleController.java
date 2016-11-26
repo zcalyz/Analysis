@@ -39,7 +39,7 @@ public class SimpleController {
 		System.out.println("orderId: " + orderId);
 		
 		model.addAttribute("user", user);
-		return "showUser";
+		return "showUser.jsp";
 	}
 	
 }
