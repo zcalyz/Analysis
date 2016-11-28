@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.zc.search.param.BaseESInsertParam;
 
-public class SimpleInsertParam extends BaseESInsertParam{
+public class SimpleInsertParamExample extends BaseESInsertParam{
 	private String name;
 
 	private String address;

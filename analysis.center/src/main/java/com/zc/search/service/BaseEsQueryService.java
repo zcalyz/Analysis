@@ -1,6 +1,7 @@
 package com.zc.search.service;
 
 import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 
@@ -11,10 +12,10 @@ import org.elasticsearch.search.sort.SortOrder;
  * @author zhaichen
  *
  */
-public abstract class AbstractEsQueryService {
+public abstract class BaseEsQueryService {
 
 	/**
-	 * 增加精确匹配（不支持通配符）
+	 * 增加精确匹配,value为多个值（不支持通配符)
 	 * 
 	 * @param searchRequest
 	 * @param key

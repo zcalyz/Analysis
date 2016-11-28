@@ -3,8 +3,8 @@ package com.zc.search.service.impl;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.springframework.stereotype.Service;
 
-import com.zc.search.param.es.SimpleSearchParam;
-import com.zc.search.service.AbstractEsQueryService;
+import com.zc.search.param.es.SimpleSearchParamExample;
+import com.zc.search.service.BaseEsQueryService;
 
 /**
  * 常用查询语句
@@ -14,7 +14,7 @@ import com.zc.search.service.AbstractEsQueryService;
  */
 
 @Service(value="simpleEsQueryServiceForTest")
-public class SimpleEsQueryServiceForTest extends AbstractEsQueryService {
+public class SimpleEsQueryServiceExample extends BaseEsQueryService {
 
 	/**
 	 * 精确匹配，不支持通配符
@@ -23,7 +23,7 @@ public class SimpleEsQueryServiceForTest extends AbstractEsQueryService {
 	 * @param searchParam
 	 */
 
-	public void addTermQueryForName(SearchRequestBuilder searchRequest, SimpleSearchParam searchParam) {
+	public void addTermQueryForName(SearchRequestBuilder searchRequest, SimpleSearchParamExample searchParam) {
 		super.addTermQuery(searchRequest, "name", searchParam.getName());
 	}
 
@@ -33,7 +33,7 @@ public class SimpleEsQueryServiceForTest extends AbstractEsQueryService {
 	 * @param searchRequest
 	 * @param searchParam
 	 */
-	public void addRangeQueryForAge(SearchRequestBuilder searchRequest, SimpleSearchParam searchParam) {
+	public void addRangeQueryForAge(SearchRequestBuilder searchRequest, SimpleSearchParamExample searchParam) {
 		super.addRangeQuery(searchRequest, "age", searchParam.getStartAge(), searchParam.getEndAge());
 	}
 
@@ -43,7 +43,7 @@ public class SimpleEsQueryServiceForTest extends AbstractEsQueryService {
 	 * @param searchRequest
 	 * @param searchParam
 	 */
-	public void addRangeQueryForCreateTime(SearchRequestBuilder searchRequest, SimpleSearchParam searchParam) {
+	public void addRangeQueryForCreateTime(SearchRequestBuilder searchRequest, SimpleSearchParamExample searchParam) {
 		super.addRangeQuery(searchRequest, "creatTime", searchParam.getStartTime().getTime(),
 				searchParam.getEndTime().getTime());
 	}
@@ -54,7 +54,7 @@ public class SimpleEsQueryServiceForTest extends AbstractEsQueryService {
 	 * @param searchRequest
 	 * @param searchParam
 	 */
-	public void addWildcardForAge(SearchRequestBuilder searchRequest, SimpleSearchParam searchParam) {
+	public void addWildcardForAge(SearchRequestBuilder searchRequest, SimpleSearchParamExample searchParam) {
 		super.addWildcardForAge(searchRequest, "name", "ja*");
 	}
 
@@ -64,7 +64,7 @@ public class SimpleEsQueryServiceForTest extends AbstractEsQueryService {
 	 * @param searchRequest
 	 * @param searchParam
 	 */
-	public void addMatchQueryForName(SearchRequestBuilder searchRequest, SimpleSearchParam searchParam) {
+	public void addMatchQueryForName(SearchRequestBuilder searchRequest, SimpleSearchParamExample searchParam) {
 		super.addMatchQueryForName(searchRequest, "name", "jack and mike");
 	}
 

@@ -7,6 +7,8 @@ package com.zc.constant;
  */
 public class AddressConstant {
 	public static final String ZOOKEEPER_ADDRESS_NAME = "zookeeper.address";
-	
-	public static final String ES_ADDRESS_NAME = "elasticsearch.address";
+
+	public static final String ES_LOCAL_ADDRESS = "elasticsearch.local.address";
+
+	public static final String ES_REMOTE_ADDRESS = "elasticsearch.remote.address";
 }

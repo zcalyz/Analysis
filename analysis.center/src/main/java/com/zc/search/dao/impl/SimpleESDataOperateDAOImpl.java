@@ -3,7 +3,6 @@ package com.zc.search.dao.impl;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
-
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -11,6 +10,7 @@ import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,9 @@ import com.zc.search.dao.ESDataOperateDAO;
 import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
 import com.zc.search.param.es.SimpleSearchParam;
-import com.zc.search.service.impl.SimpleEsQueryServiceForTest;
+import com.zc.search.param.es.SimpleSearchParamExample;
+import com.zc.search.service.impl.SimpleEsQueryService;
+import com.zc.search.service.impl.SimpleEsQueryServiceExample;
 import com.zc.util.JsonUtil;
 import com.zc.util.PropertyFileReadUtil;
 
@@ -28,35 +30,26 @@ public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
 
 	private static Logger logger = LoggerFactory.getLogger(SimpleESDataOperateDAOImpl.class);
 	
-	private SimpleEsQueryServiceForTest simpleQueryService = new SimpleEsQueryServiceForTest();
+	private SimpleEsQueryServiceExample simpleQueryServiceExample = new SimpleEsQueryServiceExample();
+	
+	private SimpleEsQueryService simpleQueryService = new SimpleEsQueryService();
 
 	@Override
-	public void searchData(BaseESSearchParam searchParam) {
-		SimpleSearchParam simpleSearchParam = (SimpleSearchParam) searchParam;
+	public SearchHits searchData(BaseESSearchParam searchParam) {
 
 		TransportClient esClient = getESClient();
 		SearchRequestBuilder searchRequest = initBaseSearchQuery(esClient, searchParam);
-
-		// 拼接查询语句
-//		simpleQueryService.addTermQueryForName(searchRequest, simpleSearchParam);
-		simpleQueryService.addRangeQueryForCreateTime(searchRequest, simpleSearchParam);
-//		simpleQueryService.addRangeQueryForAge(searchRequest, simpleSearchParam);
-//		simpleQueryService.addSortField(searchRequest, "age", SortOrder.DESC);
-//		simpleQueryService.addMatchQueryForName(searchRequest, simpleSearchParam);
+		
+		SimpleSearchParam simpleSearchParam = (SimpleSearchParam) searchParam; 
+		simpleQueryService.addRangeQueryForTimestamp(searchRequest, simpleSearchParam);
+		simpleQueryService.addTermQueryForDstType(searchRequest, simpleSearchParam);
 
 		// setFrom，从哪一个Score开始查
-		searchRequest.setSize(20).setExplain(true);
+		searchRequest.setSize(50).setExplain(true);
 		SearchResponse response = executeSearchOperation(searchRequest);
 
-		SearchHit[] hits = response.getHits().getHits();
-		for (SearchHit hit : hits) {
-			Map<String, Object> source = hit.getSource();
-			System.out.println(source);
-		}
-
-		System.out.println(response.getHits().getTotalHits());
-
-		esClient.close();
+		esClient.close();	
+		return response.getHits();
 	}
 
 	@Override
@@ -78,7 +71,7 @@ public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
 		TransportClient client = TransportClient.builder().build();
 		Map<String, String> addressMap = PropertyFileReadUtil.getAddressMap();
 
-		String[] addressArray = addressMap.get(AddressConstant.ES_ADDRESS_NAME).split(",");
+		String[] addressArray = addressMap.get(AddressConstant.ES_REMOTE_ADDRESS).split(",");
 
 		for (String address : addressArray) {
 			try {
@@ -113,6 +106,20 @@ public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
 			SearchType searchType) {
 		return esClient.prepareSearch(searchParam.getIndexs()).setTypes(searchParam.getTypes())
 				.setSearchType(searchType);
+	}
+	
+	/**
+	 * 拼装基本的查询语句，用于测试
+	 * @param searchRequest
+	 * @param simpleSearchParam
+	 */
+	private void initTestQuery(SearchRequestBuilder searchRequest, SimpleSearchParamExample simpleSearchParam){	
+//		 拼接查询语句
+		simpleQueryServiceExample.addTermQueryForName(searchRequest, simpleSearchParam);
+		simpleQueryServiceExample.addRangeQueryForCreateTime(searchRequest, simpleSearchParam);
+		simpleQueryServiceExample.addRangeQueryForAge(searchRequest, simpleSearchParam);
+		simpleQueryServiceExample.addSortField(searchRequest, "age", SortOrder.DESC);
+		simpleQueryServiceExample.addMatchQueryForName(searchRequest, simpleSearchParam);
 	}
 
 	/**
