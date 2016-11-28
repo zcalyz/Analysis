@@ -20,13 +20,15 @@ import com.zc.search.dao.ESDataOperateDAO;
 import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
 import com.zc.search.param.es.SimpleSearchParam;
+import com.zc.search.service.impl.SimpleEsQueryServiceForTest;
 import com.zc.util.JsonUtil;
 import com.zc.util.PropertyFileReadUtil;
-import com.zc.util.SimpleQueryUtil;
 
 public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
 
 	private static Logger logger = LoggerFactory.getLogger(SimpleESDataOperateDAOImpl.class);
+	
+	private SimpleEsQueryServiceForTest simpleQueryService = new SimpleEsQueryServiceForTest();
 
 	@Override
 	public void searchData(BaseESSearchParam searchParam) {
@@ -36,11 +38,11 @@ public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
 		SearchRequestBuilder searchRequest = initBaseSearchQuery(esClient, searchParam);
 
 		// 拼接查询语句
-//		SimpleQueryUtil.addTermQueryForName(searchRequest, simpleSearchParam);
-		SimpleQueryUtil.addRangeQueryForCreateTime(searchRequest, simpleSearchParam);
-//		SimpleQueryUtil.addRangeQueryForAge(searchRequest, simpleSearchParam);
-//		SimpleQueryUtil.addSortField(searchRequest, "age", SortOrder.DESC);
-		// SimpleQueryUtil.addMatchQueryForName(searchRequest, simpleSearchParam);
+//		simpleQueryService.addTermQueryForName(searchRequest, simpleSearchParam);
+		simpleQueryService.addRangeQueryForCreateTime(searchRequest, simpleSearchParam);
+//		simpleQueryService.addRangeQueryForAge(searchRequest, simpleSearchParam);
+//		simpleQueryService.addSortField(searchRequest, "age", SortOrder.DESC);
+//		simpleQueryService.addMatchQueryForName(searchRequest, simpleSearchParam);
 
 		// setFrom，从哪一个Score开始查
 		searchRequest.setSize(20).setExplain(true);
