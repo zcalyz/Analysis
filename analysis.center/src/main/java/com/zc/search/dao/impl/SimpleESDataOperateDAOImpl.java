@@ -8,6 +8,7 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -16,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zc.constant.AddressConstant;
+import com.zc.constant.EsConstant;
+import com.zc.constant.EsInfo;
 import com.zc.search.dao.ESDataOperateDAO;
 import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
@@ -68,7 +71,9 @@ public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
 	 * @return
 	 */
 	private TransportClient getESClient() {
-		TransportClient client = TransportClient.builder().build();
+		Settings settings = Settings.settingsBuilder().put(EsConstant.CLUSTER_NAME, EsInfo.REMOTE_RELATION.getClusterName()).build();
+		
+		TransportClient client = TransportClient.builder().settings(settings).build();
 		Map<String, String> addressMap = PropertyFileReadUtil.getAddressMap();
 
 		String[] addressArray = addressMap.get(AddressConstant.ES_REMOTE_ADDRESS).split(",");

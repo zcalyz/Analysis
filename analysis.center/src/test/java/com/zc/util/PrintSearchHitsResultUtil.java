@@ -24,6 +24,7 @@ public class PrintSearchHitsResultUtil {
 			System.out.print(source.get("dst") + "  ");
 			System.out.print(source.get("url") + "  ");
 			System.out.println(source.get("dstType") + " ");
+			System.out.println(source.get("timestamp") + " ");
 			System.out.println(source.get("interval") + " ");
 		}
 	}

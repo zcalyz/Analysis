@@ -4,7 +4,7 @@ import org.elasticsearch.search.SearchHits;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
-import com.zc.constant.EsIndex;
+import com.zc.constant.EsInfo;
 import com.zc.search.dao.impl.SimpleESDataOperateDAOImpl;
 import com.zc.search.param.es.SimpleInsertParamExample;
 import com.zc.search.param.es.SimpleSearchParam;
@@ -35,8 +35,8 @@ public class ESDataOperateDAOTest {
 	}
 
 	public static void initInsertParam(SimpleInsertParamExample insertParam) {
-		insertParam.setIndex(EsIndex.LOCAL_DEFAULT.getIndex());
-		insertParam.setType(EsIndex.LOCAL_DEFAULT.getType());
+		insertParam.setIndex(EsInfo.LOCAL_DEFAULT.getIndex());
+		insertParam.setType(EsInfo.LOCAL_DEFAULT.getType());
 		insertParam.setAddress("street NO.2");
 	}
 	
@@ -51,17 +51,17 @@ public class ESDataOperateDAOTest {
 		initSimpleSearchParam(simpleSearchParam);
 		
 		SearchHits searchData = esReader.searchData(simpleSearchParam);
-		PrintSearchHitsResultUtil.printWholeLine(searchData);
+		PrintSearchHitsResultUtil.printForRelation(searchData);
 	}
 	
 	public static void initSimpleSearchParam(SimpleSearchParam searchParam) {
-		searchParam.setIndexs(new String[] { EsIndex.REMOTE_RELATION.getIndex() });
-		searchParam.setTypes(new String[] {EsIndex.REMOTE_RELATION.getType()});
+		searchParam.setIndexs(new String[] { EsInfo.REMOTE_RELATION.getIndex() });
+		searchParam.setTypes(new String[] {EsInfo.REMOTE_RELATION.getType()});
 		
-		searchParam.setDstType("3");
+		searchParam.setDstType("2");
 		
-		LocalDateTime startTime = new LocalDateTime(2016, 7, 22	, 15, 0);
-		LocalDateTime endTime = new LocalDateTime(2016, 7, 23, 0, 0);
+		LocalDateTime startTime = new LocalDateTime(2016, 7, 22	, 15, 56);
+		LocalDateTime endTime = new LocalDateTime(2016, 7, 22, 15, 57);
 		searchParam.setStartTime(startTime.toDate());
 		searchParam.setEndTime(endTime.toDate());
 	}

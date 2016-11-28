@@ -16,7 +16,7 @@ public class SimpleEsQueryService extends BaseEsQueryService{
 
 	public void addTermQueryForDstType(SearchRequestBuilder searchRequest, SimpleSearchParam simpleSearchParam) {
 		String dstType = simpleSearchParam.getDstType();
-		super.addTermQuery(searchRequest, "dstTye", new String[]{dstType});
+		super.addTermQuery(searchRequest, "dstType", new String[]{dstType});
 	}
 	
 	/**
@@ -26,6 +26,6 @@ public class SimpleEsQueryService extends BaseEsQueryService{
 	 * @param simpleSearchParam
 	 */
 	public void addRangeQueryForTimestamp(SearchRequestBuilder searchRequest, SimpleSearchParam simpleSearchParam) {
-		super.addRangeQuery(searchRequest, "timestamp", simpleSearchParam.getStartTime(), simpleSearchParam.getEndTime());
+		super.addRangeQuery(searchRequest, "timestamp", simpleSearchParam.getStartTime().toLocaleString(), simpleSearchParam.getEndTime().toLocaleString());
 	}
 }
