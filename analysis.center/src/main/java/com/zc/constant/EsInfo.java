@@ -6,8 +6,9 @@ package com.zc.constant;
  *
  */
 public enum EsInfo {
-	REMOTE_RELATION("Apm", "apm2.0-10.82.81.180-relationship-1", "RelationShip"),
-	LOCAL_DEFAULT("local-elasticsearch", "db_index_date","table_type");
+	REMOTE_JEESHOP_RELATION("Apm", "apm2.0-10.82.81.180-relationship-1", "RelationShip"),
+	LOCAL_DEFAULT("local-elasticsearch", "db_index_date","table_type"),
+	REMOTE_SERVICE_RELATION("Apm", "apm2.0-115.236.12.194-relationship-1", "RelationShip");
 	
 	private String clusterName;
 	

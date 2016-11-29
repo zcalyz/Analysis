@@ -10,16 +10,15 @@ import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zc.constant.AddressConstant;
-import com.zc.constant.EsConstant;
+import com.zc.constant.EsColumnConstant;
 import com.zc.constant.EsInfo;
-import com.zc.search.dao.ESDataOperateDAO;
+import com.zc.search.dao.EsDataOperateDAO;
 import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
 import com.zc.search.param.es.SimpleSearchParam;
@@ -29,7 +28,7 @@ import com.zc.search.service.es.impl.SimpleEsQueryServiceExample;
 import com.zc.util.JsonUtil;
 import com.zc.util.PropertyFileReadUtil;
 
-public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
+public class SimpleESDataOperateDAOImpl implements EsDataOperateDAO {
 
 	private static Logger logger = LoggerFactory.getLogger(SimpleESDataOperateDAOImpl.class);
 	
@@ -45,10 +44,10 @@ public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
 		
 		SimpleSearchParam simpleSearchParam = (SimpleSearchParam) searchParam; 
 		simpleQueryService.addRangeQueryForTimestamp(searchRequest, simpleSearchParam);
-		simpleQueryService.addTermQueryForDstType(searchRequest, simpleSearchParam);
+//		simpleQueryService.addTermQueryForDstType(searchRequest, simpleSearchParam);
 
 		// setFrom，从哪一个Score开始查
-		searchRequest.setSize(50).setExplain(true);
+		searchRequest.setExplain(true);
 		SearchResponse response = executeSearchOperation(searchRequest);
 
 		esClient.close();	
@@ -71,7 +70,7 @@ public class SimpleESDataOperateDAOImpl implements ESDataOperateDAO {
 	 * @return
 	 */
 	private TransportClient getESClient() {
-		Settings settings = Settings.settingsBuilder().put(EsConstant.CLUSTER_NAME, EsInfo.REMOTE_RELATION.getClusterName()).build();
+		Settings settings = Settings.settingsBuilder().put(EsColumnConstant.CLUSTER_NAME, EsInfo.REMOTE_JEESHOP_RELATION.getClusterName()).build();
 		
 		TransportClient client = TransportClient.builder().settings(settings).build();
 		Map<String, String> addressMap = PropertyFileReadUtil.getAddressMap();

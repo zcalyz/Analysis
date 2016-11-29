@@ -20,7 +20,7 @@ public class TransactionModel {
 	/**
 	 * 服务时间
 	 */
-	private double serviceTime;
+	private Long serviceTime;
 
 	public String getName() {
 		return name;
@@ -38,11 +38,11 @@ public class TransactionModel {
 		this.lambda = lambda;
 	}
 
-	public double getServiceTime() {
+	public Long getServiceTime() {
 		return serviceTime;
 	}
 
-	public void setServiceTime(double serviceTime) {
+	public void setServiceTime(Long serviceTime) {
 		this.serviceTime = serviceTime;
 	}
 	

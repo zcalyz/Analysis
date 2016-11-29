@@ -1,0 +1,95 @@
+package com.zc.analysis.service.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.springframework.util.CollectionUtils;
+import com.zc.analysis.model.TransactionModel;
+import com.zc.common.service.RetriveInputDataSerivce;
+import com.zc.search.dao.EsDataOperateDAO;
+import com.zc.search.param.BaseESSearchParam;
+
+public class EsRetriveInputDataService implements RetriveInputDataSerivce{
+	
+	@Resource(name="simpleESDataOperateDAOImpl")
+	private EsDataOperateDAO  dataOperateDAO;
+	
+	private EsDataAnalysisService dataAnalysisService;
+
+	@Override
+	public Map<String, List<TransactionModel>> retriveInputData(BaseESSearchParam searchParam) {
+		
+		SearchHits searchData = dataOperateDAO.searchData(searchParam);
+		
+		// TODO Util判空
+		
+		// 获取队列模型所需输入数据 格式： Map<stationName, TransactionModels>
+		Map<String, List<TransactionModel>> inputDateMap = new HashMap<String, List<TransactionModel>>();
+		
+		// 以节点为维度对检索数据进行拆分
+		Map<String, List<SearchHit>> separatedDataByStation = dataAnalysisService.separateDataByStations(searchData);
+		
+		for(Map.Entry<String, List<SearchHit>> stationDataEntry : separatedDataByStation.entrySet()){
+			// 以节点为维度获取查询原始数据
+			List<SearchHit> searchHitsInStation = stationDataEntry.getValue();
+			
+			List<TransactionModel> transtionModels = getTransactionInStationDimension(searchHitsInStation);
+			
+			inputDateMap.put(stationDataEntry.getKey(), transtionModels);
+		}
+		
+		return inputDateMap;
+	}
+	
+	/**
+	 * 获取指定station的所有TransactionModel
+	 * @return
+	 */
+	public List<TransactionModel> getTransactionInStationDimension(List<SearchHit> searchHitInStation){
+		List<TransactionModel> transactionModels = new ArrayList<TransactionModel>();
+		
+		Map<String, List<SearchHit>> separatedDataByUrl = dataAnalysisService.sepatateDataByUrl(searchHitInStation);
+		
+		for(Map.Entry<String, List<SearchHit>> searchHitsInUrlEntry : separatedDataByUrl.entrySet()){
+			
+			TransactionModel transactionModel = initTransactionBySeperatedData(searchHitsInUrlEntry);
+
+			if(transactionModel != null){
+				transactionModels.add(transactionModel);
+			}
+		}
+		
+		return transactionModels;
+	}
+	
+	/**
+	 * 根据以Url为维度划分的数据初始化TransactionModel
+	 * @param searchHits
+	 * @return
+	 */
+	public TransactionModel initTransactionBySeperatedData(Map.Entry<String, List<SearchHit>> searchHitsInUrlEntry){
+		
+		List<SearchHit> searchHitsInUrl = searchHitsInUrlEntry.getValue();
+		
+		if(CollectionUtils.isEmpty(searchHitsInUrl)){
+			return null;
+		}
+		
+		TransactionModel transactionModel = new TransactionModel();
+		transactionModel.setName(searchHitsInUrlEntry.getKey());
+		// TODO
+		transactionModel.setLambda(1);
+		// 获取平均服务时间
+		Long averageServiceTime = dataAnalysisService.calAverageServiceTime(searchHitsInUrl);
+		if(averageServiceTime != null){
+			transactionModel.setServiceTime(averageServiceTime);
+		}
+		return transactionModel;
+	}
+
+}

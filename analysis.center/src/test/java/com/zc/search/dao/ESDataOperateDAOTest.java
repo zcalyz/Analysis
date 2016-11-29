@@ -55,13 +55,13 @@ public class ESDataOperateDAOTest {
 	}
 	
 	public static void initSimpleSearchParam(SimpleSearchParam searchParam) {
-		searchParam.setIndexs(new String[] { EsInfo.REMOTE_RELATION.getIndex() });
-		searchParam.setTypes(new String[] {EsInfo.REMOTE_RELATION.getType()});
+		searchParam.setIndexs(new String[] { EsInfo.REMOTE_SERVICE_RELATION.getIndex() });
+		searchParam.setTypes(new String[] {EsInfo.REMOTE_SERVICE_RELATION.getType()});
 		
 		searchParam.setDstType("2");
 		
-		LocalDateTime startTime = new LocalDateTime(2016, 7, 22	, 15, 56);
-		LocalDateTime endTime = new LocalDateTime(2016, 7, 22, 15, 57);
+		LocalDateTime startTime = new LocalDateTime(2016, 11, 29, 10, 02);
+		LocalDateTime endTime = new LocalDateTime(2016, 11, 29, 10, 05);
 		searchParam.setStartTime(startTime.toDate());
 		searchParam.setEndTime(endTime.toDate());
 	}

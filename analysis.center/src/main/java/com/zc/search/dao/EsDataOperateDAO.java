@@ -5,7 +5,7 @@ import org.elasticsearch.search.SearchHits;
 import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
 
-public interface ESDataOperateDAO {
+public interface EsDataOperateDAO {
 
 	/**
 	 * 根据查询条件查询查询数据
