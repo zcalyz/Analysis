@@ -57,7 +57,7 @@ public class EsDataAnalysisService {
 			addSearchHitToResultMapByColumn(resultMap, searchHit, EsColumnConstant.URL);
 		}
 		
-		return null;
+		return resultMap;
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class EsDataAnalysisService {
 		Long sumServiceTime = 0L;
 		for(SearchHit searchHit : searchHits){
 			Map<String, Object> data = searchHit.getSource();
-			Long serviceTime = (Long) data.get(EsColumnConstant.SERVICE_TIME_NAME);
+			Long serviceTime = Long.valueOf(data.get(EsColumnConstant.SERVICE_TIME_NAME) + "");
 			sumServiceTime += serviceTime;
 		}
 		

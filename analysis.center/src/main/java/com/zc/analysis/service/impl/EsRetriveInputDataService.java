@@ -12,19 +12,21 @@ import org.springframework.util.CollectionUtils;
 import com.zc.analysis.model.TransactionModel;
 import com.zc.common.service.RetriveInputDataSerivce;
 import com.zc.search.dao.EsDataOperateDAO;
+import com.zc.search.dao.impl.SimpleESDataOperateDAOImpl;
 import com.zc.search.param.BaseESSearchParam;
 
 public class EsRetriveInputDataService implements RetriveInputDataSerivce{
 	
 	@Resource(name="simpleESDataOperateDAOImpl")
-	private EsDataOperateDAO  dataOperateDAO;
+	private EsDataOperateDAO  dataOperateDAO = new SimpleESDataOperateDAOImpl();
 	
-	private EsDataAnalysisService dataAnalysisService;
+	private EsDataAnalysisService dataAnalysisService = new EsDataAnalysisService();
 
 	@Override
 	public Map<String, List<TransactionModel>> retriveInputData(BaseESSearchParam searchParam) {
 		
 		SearchHits searchData = dataOperateDAO.searchData(searchParam);
+		System.out.println(searchData.getHits().length);
 		
 		// TODO Util判空
 		
@@ -50,7 +52,7 @@ public class EsRetriveInputDataService implements RetriveInputDataSerivce{
 	 * 获取指定station的所有TransactionModel
 	 * @return
 	 */
-	public List<TransactionModel> getTransactionInStationDimension(List<SearchHit> searchHitInStation){
+	private List<TransactionModel> getTransactionInStationDimension(List<SearchHit> searchHitInStation){
 		List<TransactionModel> transactionModels = new ArrayList<TransactionModel>();
 		
 		Map<String, List<SearchHit>> separatedDataByUrl = dataAnalysisService.sepatateDataByUrl(searchHitInStation);
@@ -72,7 +74,7 @@ public class EsRetriveInputDataService implements RetriveInputDataSerivce{
 	 * @param searchHits
 	 * @return
 	 */
-	public TransactionModel initTransactionBySeperatedData(Map.Entry<String, List<SearchHit>> searchHitsInUrlEntry){
+	private TransactionModel initTransactionBySeperatedData(Map.Entry<String, List<SearchHit>> searchHitsInUrlEntry){
 		
 		List<SearchHit> searchHitsInUrl = searchHitsInUrlEntry.getValue();
 		
@@ -82,8 +84,9 @@ public class EsRetriveInputDataService implements RetriveInputDataSerivce{
 		
 		TransactionModel transactionModel = new TransactionModel();
 		transactionModel.setName(searchHitsInUrlEntry.getKey());
-		// TODO
-		transactionModel.setLambda(1);
+		
+		// 设置这段时间改请求出现的次数
+		transactionModel.setArriveRate(searchHitsInUrl.size());
 		// 获取平均服务时间
 		Long averageServiceTime = dataAnalysisService.calAverageServiceTime(searchHitsInUrl);
 		if(averageServiceTime != null){

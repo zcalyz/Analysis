@@ -1,9 +1,12 @@
 package com.zc.util;
 
+import java.util.List;
 import java.util.Map;
 
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+
+import com.zc.analysis.model.TransactionModel;
 
 public class PrintSearchHitsResultUtil {
 	
@@ -27,5 +30,26 @@ public class PrintSearchHitsResultUtil {
 			System.out.println(source.get("timestamp") + " ");
 			System.out.println(source.get("interval") + " ");
 		}
+	}
+	
+	public static void printForWholeTableFormat(Map<String, List<TransactionModel>> inputData){
+		
+		for(Map.Entry<String, List<TransactionModel>> stationDataEntry : inputData.entrySet()){
+			List<TransactionModel> stationData = stationDataEntry.getValue();
+			System.out.print(stationDataEntry.getKey() + "    ");
+			printColumn(stationData);
+			System.out.print(stationDataEntry.getKey() + "    ");
+			for(TransactionModel model : stationData){
+				System.out.print(model.getServiceTime() + "-" + model.getArriveRate() + "    ");
+			}
+			System.out.println("\n");
+		}
+	}
+	
+	public static void printColumn(List<TransactionModel> transactionModels){
+		for(TransactionModel model : transactionModels){
+			System.out.print(model.getName() + "  ");
+		}
+		System.out.println();
 	}
 }

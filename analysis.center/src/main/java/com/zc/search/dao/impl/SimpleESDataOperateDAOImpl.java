@@ -35,6 +35,8 @@ public class SimpleESDataOperateDAOImpl implements EsDataOperateDAO {
 	private SimpleEsQueryServiceExample simpleQueryServiceExample = new SimpleEsQueryServiceExample();
 	
 	private SimpleEsQueryService simpleQueryService = new SimpleEsQueryService();
+	
+	private static final int ES_MAX_COUNT = 10000;
 
 	@Override
 	public SearchHits searchData(BaseESSearchParam searchParam) {
@@ -47,7 +49,7 @@ public class SimpleESDataOperateDAOImpl implements EsDataOperateDAO {
 //		simpleQueryService.addTermQueryForDstType(searchRequest, simpleSearchParam);
 
 		// setFrom，从哪一个Score开始查
-		searchRequest.setExplain(true);
+		searchRequest.setSize(ES_MAX_COUNT).setExplain(true);
 		SearchResponse response = executeSearchOperation(searchRequest);
 
 		esClient.close();	

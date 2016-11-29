@@ -15,7 +15,7 @@ public class TransactionModel {
 	/**
 	 * 事务的到达率
 	 */
-	private double lambda;
+	private double arriveRate;
 	
 	/**
 	 * 服务时间
@@ -30,12 +30,12 @@ public class TransactionModel {
 		this.name = name;
 	}
 
-	public double getLambda() {
-		return lambda;
+	public double getArriveRate() {
+		return arriveRate;
 	}
 
-	public void setLambda(double lambda) {
-		this.lambda = lambda;
+	public void setArriveRate(double arriveRate) {
+		this.arriveRate = arriveRate;
 	}
 
 	public Long getServiceTime() {
