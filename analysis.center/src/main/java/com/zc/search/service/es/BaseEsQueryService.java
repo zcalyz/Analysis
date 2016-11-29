@@ -1,4 +1,4 @@
-package com.zc.search.service;
+package com.zc.search.service.es;
 
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;

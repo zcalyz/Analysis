@@ -24,8 +24,8 @@ import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
 import com.zc.search.param.es.SimpleSearchParam;
 import com.zc.search.param.es.SimpleSearchParamExample;
-import com.zc.search.service.impl.SimpleEsQueryService;
-import com.zc.search.service.impl.SimpleEsQueryServiceExample;
+import com.zc.search.service.es.impl.SimpleEsQueryService;
+import com.zc.search.service.es.impl.SimpleEsQueryServiceExample;
 import com.zc.util.JsonUtil;
 import com.zc.util.PropertyFileReadUtil;
 

@@ -1,10 +1,10 @@
-package com.zc.search.service.impl;
+package com.zc.search.service.es.impl;
 
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.springframework.stereotype.Service;
 
 import com.zc.search.param.es.SimpleSearchParamExample;
-import com.zc.search.service.BaseEsQueryService;
+import com.zc.search.service.es.BaseEsQueryService;
 
 /**
  * 常用查询语句
