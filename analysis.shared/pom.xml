@@ -4,7 +4,7 @@
 
 	<groupId>com.zc</groupId>
 	<artifactId>analysis.shared</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>analysis.shared</name>
