@@ -1,11 +1,18 @@
 package com.zc.search.service.es.impl;
 
 import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.springframework.stereotype.Component;
 
 import com.zc.search.param.es.SimpleSearchParam;
 import com.zc.search.service.es.BaseEsQueryService;
 
-public class SimpleEsQueryService extends BaseEsQueryService{
+/**
+ * 用于拼装查询es的语句
+ * @author zhaichen
+ *
+ */
+@Component(value="esQueryService")
+public class EsQueryService extends BaseEsQueryService{
 	
 	/**
 	 * 精确匹配，不支持通配符

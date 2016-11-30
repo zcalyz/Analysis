@@ -2,6 +2,8 @@ package com.zc.analysis.algorithm.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.zc.analysis.algorithm.service.QueueModelSolverService;
 import com.zc.analysis.model.Station;
 import com.zc.analysis.model.TransactionModel;
@@ -12,6 +14,8 @@ import com.zc.util.TypeConvertUtil;
  * @author zhaichen
  *
  */
+
+@Component(value="singleQueueSolverService")
 public class SingleQueueSolverService implements QueueModelSolverService{
 	
 	@Override

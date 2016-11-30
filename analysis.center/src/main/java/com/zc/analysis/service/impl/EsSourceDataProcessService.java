@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -17,6 +18,8 @@ import com.zc.constant.EsColumnConstant;
  * @author zhaichen
  *
  */
+
+@Component(value="esSourceDataProcessService")
 public class EsSourceDataProcessService {
 	
 	/**

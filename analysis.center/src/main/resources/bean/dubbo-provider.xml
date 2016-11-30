@@ -28,9 +28,9 @@
 	<!-- test service end-->
 	
 	<!-- 获取模型所需服务数据服务  -->
-	<dubbo:service interface="com.zc.common.service.RetriveInputDataSerivce"
-		ref="simpleEsRetriveInputDataService" />
-	
-	<bean id="simpleEsRetriveInputDataService"
-	class="com.zc.analysis.service.impl.SimpleEsRetriveInputDataService" />
+	<dubbo:service interface="com.zc.common.service.RetriveModelInputDataSerivce"
+		ref="esRetriveModelInputDataService" />
+	<!-- 模型解析算法服务  -->
+	<dubbo:service interface="com.zc.analysis.algorithm.service.QueueModelSolverService"
+		ref="singleQueueSolverService"/>
 </beans>

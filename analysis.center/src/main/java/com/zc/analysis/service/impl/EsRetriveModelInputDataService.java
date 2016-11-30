@@ -7,13 +7,13 @@ import java.util.Map;
 import javax.annotation.Resource;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import com.zc.analysis.model.Station;
 import com.zc.analysis.model.TransactionModel;
 import com.zc.common.service.RetriveModelInputDataSerivce;
 import com.zc.search.dao.DataReadDAO;
-import com.zc.search.dao.impl.ESDataReadDAOImpl;
 import com.zc.search.param.BaseESSearchParam;
 
 /**
@@ -21,12 +21,14 @@ import com.zc.search.param.BaseESSearchParam;
  * @author zhaichen
  *
  */
+@Component(value="esRetriveModelInputDataService")
 public class EsRetriveModelInputDataService implements RetriveModelInputDataSerivce{
 	
-	@Resource(name="simpleESDataOperateDAOImpl")
-	private DataReadDAO  dataOperateDAO = new ESDataReadDAOImpl();
+	@Resource(name="esDataReadDAO")
+	private DataReadDAO  dataOperateDAO;
 	
-	private EsSourceDataProcessService dataAnalysisService = new EsSourceDataProcessService();
+	@Resource(name="esSourceDataProcessService")
+	private EsSourceDataProcessService dataAnalysisService;
 
 	@Override
 	public List<Station> retriveInputData(BaseESSearchParam searchParam) {

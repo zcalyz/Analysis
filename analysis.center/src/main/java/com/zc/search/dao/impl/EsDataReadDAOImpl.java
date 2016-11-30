@@ -3,6 +3,9 @@ package com.zc.search.dao.impl;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
+
+import javax.annotation.Resource;
+
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -11,9 +14,9 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.search.SearchHits;
-import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.zc.constant.AddressConstant;
 import com.zc.constant.EsColumnConstant;
@@ -22,9 +25,7 @@ import com.zc.search.dao.DataReadDAO;
 import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
 import com.zc.search.param.es.SimpleSearchParam;
-import com.zc.search.param.es.SimpleSearchParamExample;
-import com.zc.search.service.es.impl.SimpleEsQueryService;
-import com.zc.search.service.es.impl.SimpleEsQueryServiceExample;
+import com.zc.search.service.es.impl.EsQueryService;
 import com.zc.util.JsonUtil;
 import com.zc.util.PropertyFileReadUtil;
 
@@ -33,13 +34,13 @@ import com.zc.util.PropertyFileReadUtil;
  * @author zhaichen
  *
  */
-public class ESDataReadDAOImpl implements DataReadDAO {
+@Component(value="esDataReadDAO")
+public class EsDataReadDAOImpl implements DataReadDAO {
 
-	private static Logger logger = LoggerFactory.getLogger(ESDataReadDAOImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(EsDataReadDAOImpl.class);
 	
-	private SimpleEsQueryServiceExample simpleQueryServiceExample = new SimpleEsQueryServiceExample();
-	
-	private SimpleEsQueryService simpleQueryService = new SimpleEsQueryService();
+	@Resource(name="esQueryService")
+	private EsQueryService simpleQueryService;
 	
 	private static final int ES_MAX_COUNT = 100;
 
@@ -124,14 +125,14 @@ public class ESDataReadDAOImpl implements DataReadDAO {
 	 * @param searchRequest
 	 * @param simpleSearchParam
 	 */
-	private void initTestQuery(SearchRequestBuilder searchRequest, SimpleSearchParamExample simpleSearchParam){	
-//		 拼接查询语句
-		simpleQueryServiceExample.addTermQueryForName(searchRequest, simpleSearchParam);
-		simpleQueryServiceExample.addRangeQueryForCreateTime(searchRequest, simpleSearchParam);
-		simpleQueryServiceExample.addRangeQueryForAge(searchRequest, simpleSearchParam);
-		simpleQueryServiceExample.addSortField(searchRequest, "age", SortOrder.DESC);
-		simpleQueryServiceExample.addMatchQueryForName(searchRequest, simpleSearchParam);
-	}
+//	private void initTestQuery(SearchRequestBuilder searchRequest, SimpleSearchParamExample simpleSearchParam){	
+////		 拼接查询语句
+//		simpleQueryServiceExample.addTermQueryForName(searchRequest, simpleSearchParam);
+//		simpleQueryServiceExample.addRangeQueryForCreateTime(searchRequest, simpleSearchParam);
+//		simpleQueryServiceExample.addRangeQueryForAge(searchRequest, simpleSearchParam);
+//		simpleQueryServiceExample.addSortField(searchRequest, "age", SortOrder.DESC);
+//		simpleQueryServiceExample.addMatchQueryForName(searchRequest, simpleSearchParam);
+//	}
 
 	/**
 	 * 执行查询语句
