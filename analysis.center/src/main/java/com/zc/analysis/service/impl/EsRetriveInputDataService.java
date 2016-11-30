@@ -16,12 +16,17 @@ import com.zc.search.dao.EsDataOperateDAO;
 import com.zc.search.dao.impl.SimpleESDataOperateDAOImpl;
 import com.zc.search.param.BaseESSearchParam;
 
+/**
+ * 获取模型所需输入数据
+ * @author zhaichen
+ *
+ */
 public class EsRetriveInputDataService implements RetriveInputDataSerivce{
 	
 	@Resource(name="simpleESDataOperateDAOImpl")
 	private EsDataOperateDAO  dataOperateDAO = new SimpleESDataOperateDAOImpl();
 	
-	private EsDataAnalysisService dataAnalysisService = new EsDataAnalysisService();
+	private SimpleSourceDataProcessService dataAnalysisService = new SimpleSourceDataProcessService();
 
 	@Override
 	public List<Station> retriveInputData(BaseESSearchParam searchParam) {

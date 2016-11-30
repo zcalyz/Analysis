@@ -12,7 +12,12 @@ import org.springframework.util.StringUtils;
 
 import com.zc.constant.EsColumnConstant;
 
-public class EsDataAnalysisService {
+/**
+ * 简单元数据预处理类
+ * @author zhaichen
+ *
+ */
+public class SimpleSourceDataProcessService {
 	
 	/**
 	 * 访问第三方应用所发出的消息

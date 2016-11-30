@@ -15,8 +15,8 @@ import com.zc.util.TypeConvertUtil;
 public class SolverSingleQueueOpen implements BaseSolver{
 	
 	@Override
-	public void analysisAndSetResult(Station stations) {
-		List<TransactionModel> transactions = stations.getTransactions();	
+	public void analysisAndSetResult(Station station) {
+		List<TransactionModel> transactions = station.getTransactions();	
 		
 		setThroughputAndUtilazation(transactions);
 		
@@ -95,6 +95,7 @@ public class SolverSingleQueueOpen implements BaseSolver{
 		
 		for(TransactionModel transaction : transactions){
 			double queueLength = transaction.getResidenceTime() * transaction.getArriveRate();
+			transaction.setQueueLenth(queueLength);
 		}
 	}
 
