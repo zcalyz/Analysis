@@ -11,12 +11,19 @@
                         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 
-	<dubbo:application name="simple-consumer"></dubbo:application>
+	<dubbo:application name="simple-consumer" />
 
-	<dubbo:registry protocol="zookeeper" address="${zookeeper.address}"></dubbo:registry>
-
+	<dubbo:registry protocol="zookeeper" address="${zookeeper.address}" />
+	<!-- 测试使用  start-->
 	<dubbo:reference id="userService" interface="com.zc.simple.service.UserService" />
 	
 	<dubbo:reference id="orderService" interface="com.zc.simple.service.OrderService" />
+	<!-- 测试使用  end-->
+	
+	<!-- 用于获取模型所需输入数据  -->
+	<dubbo:reference id="retriveModelInputDataSerivce" interface="com.zc.common.service.RetriveModelInputDataSerivce"/>
+
+	<!-- 模型解析算法服务 -->
+	<dubbo:reference id="queueModelSolverService" interface="com.zc.analysis.algorithm.service.QueueModelSolverService"/>
 
 </beans>

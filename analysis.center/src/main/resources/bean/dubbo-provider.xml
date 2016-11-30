@@ -27,7 +27,7 @@
 	<bean id="userService" class="com.zc.simple.service.impl.UserServiceImpl"></bean>
 	<!-- test service end-->
 	
-	<!-- 获取模型所需服务数据服务  -->
+	<!-- 用于获取模型所需输入数据  -->
 	<dubbo:service interface="com.zc.common.service.RetriveModelInputDataSerivce"
 		ref="esRetriveModelInputDataService" />
 	<!-- 模型解析算法服务  -->
