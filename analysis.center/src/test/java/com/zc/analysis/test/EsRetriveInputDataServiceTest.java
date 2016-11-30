@@ -1,12 +1,10 @@
 package com.zc.analysis.test;
 
 import java.util.List;
-import java.util.Map;
-
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
-import com.zc.analysis.model.TransactionModel;
+import com.zc.analysis.model.Station;
 import com.zc.analysis.service.impl.EsRetriveInputDataService;
 import com.zc.constant.EsInfo;
 import com.zc.search.param.es.SimpleSearchParam;
@@ -19,9 +17,9 @@ public class EsRetriveInputDataServiceTest {
 		EsRetriveInputDataService inputDataService = new EsRetriveInputDataService();
 		
 		SimpleSearchParam searchParam = initSimpleSearchParam();
-		Map<String, List<TransactionModel>> inputData = inputDataService.retriveInputData(searchParam);
+		List<Station> inputData = inputDataService.retriveInputData(searchParam);
 		
-		PrintSearchHitsResultUtil.printForWholeTableFormat(inputData);
+		PrintSearchHitsResultUtil.printForTableFormat(inputData);
 	}
 	
 	public static SimpleSearchParam initSimpleSearchParam() {

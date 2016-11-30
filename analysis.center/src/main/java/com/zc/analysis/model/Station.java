@@ -19,6 +19,7 @@ public class Station {
 	 * 节点所有事务
 	 */
 	private List<TransactionModel> transactions;
+	
 
 	public String getName() {
 		return name;

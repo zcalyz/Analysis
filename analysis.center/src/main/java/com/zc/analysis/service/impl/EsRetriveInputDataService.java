@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.springframework.util.CollectionUtils;
+
+import com.zc.analysis.model.Station;
 import com.zc.analysis.model.TransactionModel;
 import com.zc.common.service.RetriveInputDataSerivce;
 import com.zc.search.dao.EsDataOperateDAO;
@@ -23,29 +25,32 @@ public class EsRetriveInputDataService implements RetriveInputDataSerivce{
 	private EsDataAnalysisService dataAnalysisService = new EsDataAnalysisService();
 
 	@Override
-	public Map<String, List<TransactionModel>> retriveInputData(BaseESSearchParam searchParam) {
+	public List<Station> retriveInputData(BaseESSearchParam searchParam) {
 		
 		SearchHits searchData = dataOperateDAO.searchData(searchParam);
 		System.out.println(searchData.getHits().length);
 		
 		// TODO Util判空
 		
-		// 获取队列模型所需输入数据 格式： Map<stationName, TransactionModels>
-		Map<String, List<TransactionModel>> inputDateMap = new HashMap<String, List<TransactionModel>>();
+		// 获取队列模型所需输入数据
+		List<Station> stations = new ArrayList<Station>();
 		
 		// 以节点为维度对检索数据进行拆分
 		Map<String, List<SearchHit>> separatedDataByStation = dataAnalysisService.separateDataByStations(searchData);
 		
 		for(Map.Entry<String, List<SearchHit>> stationDataEntry : separatedDataByStation.entrySet()){
+			Station station = new Station();
+			station.setName(stationDataEntry.getKey());
 			// 以节点为维度获取查询原始数据
 			List<SearchHit> searchHitsInStation = stationDataEntry.getValue();
 			
 			List<TransactionModel> transtionModels = getTransactionInStationDimension(searchHitsInStation);
 			
-			inputDateMap.put(stationDataEntry.getKey(), transtionModels);
+			station.setTransactions(transtionModels);
+			stations.add(station);
 		}
 		
-		return inputDateMap;
+		return stations;
 	}
 	
 	/**

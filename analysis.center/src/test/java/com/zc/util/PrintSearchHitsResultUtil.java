@@ -6,6 +6,7 @@ import java.util.Map;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 
+import com.zc.analysis.model.Station;
 import com.zc.analysis.model.TransactionModel;
 
 public class PrintSearchHitsResultUtil {
@@ -32,13 +33,13 @@ public class PrintSearchHitsResultUtil {
 		}
 	}
 	
-	public static void printForWholeTableFormat(Map<String, List<TransactionModel>> inputData){
+	public static void printForTableFormat(List<Station> inputData){
 		
-		for(Map.Entry<String, List<TransactionModel>> stationDataEntry : inputData.entrySet()){
-			List<TransactionModel> stationData = stationDataEntry.getValue();
-			System.out.print(stationDataEntry.getKey() + "    ");
+		for(Station station  : inputData){
+			List<TransactionModel> stationData = station.getTransactions();
+			System.out.print(station.getName() + "    ");
 			printColumn(stationData);
-			System.out.print(stationDataEntry.getKey() + "    ");
+			System.out.print(station.getName() + "    ");
 			for(TransactionModel model : stationData){
 				System.out.print(model.getServiceTime() + "-" + model.getArriveRate() + "    ");
 			}
