@@ -1,7 +1,11 @@
 package com.zc.search.param;
 
-public abstract class BaseESSearchParam {
+import java.io.Serializable;
+
+public abstract class BaseESSearchParam implements Serializable{
 	
+	private static final long serialVersionUID = -822666494853562714L;
+
 	protected String[] indexs;
 	
 	protected String[] types;

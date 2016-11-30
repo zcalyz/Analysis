@@ -4,7 +4,7 @@ import org.elasticsearch.search.SearchHits;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
-import com.zc.constant.EsInfo;
+import com.zc.constant.EsDBInfo;
 import com.zc.search.dao.impl.EsDataReadDAOImpl;
 import com.zc.search.param.es.SimpleInsertParamExample;
 import com.zc.search.param.es.SimpleSearchParam;
@@ -35,8 +35,8 @@ public class ESDataOperateDAOTest {
 	}
 
 	public static void initInsertParam(SimpleInsertParamExample insertParam) {
-		insertParam.setIndex(EsInfo.LOCAL_DEFAULT.getIndex());
-		insertParam.setType(EsInfo.LOCAL_DEFAULT.getType());
+		insertParam.setIndex(EsDBInfo.LOCAL_DEFAULT.getIndex());
+		insertParam.setType(EsDBInfo.LOCAL_DEFAULT.getType());
 		insertParam.setAddress("street NO.2");
 	}
 	
@@ -55,8 +55,8 @@ public class ESDataOperateDAOTest {
 	}
 	
 	public static void initSimpleSearchParam(SimpleSearchParam searchParam) {
-		searchParam.setIndexs(new String[] { EsInfo.REMOTE_SERVICE_RELATION.getIndex() });
-		searchParam.setTypes(new String[] {EsInfo.REMOTE_SERVICE_RELATION.getType()});
+		searchParam.setIndexs(new String[] { EsDBInfo.REMOTE_SERVICE_RELATION.getIndex() });
+		searchParam.setTypes(new String[] {EsDBInfo.REMOTE_SERVICE_RELATION.getType()});
 		
 		searchParam.setDstType("2");
 		

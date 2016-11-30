@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 import com.zc.constant.AddressConstant;
 import com.zc.constant.EsColumnConstant;
-import com.zc.constant.EsInfo;
+import com.zc.constant.EsDBInfo;
 import com.zc.search.dao.DataReadDAO;
 import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
@@ -78,7 +78,7 @@ public class EsDataReadDAOImpl implements DataReadDAO {
 	 * @return
 	 */
 	private TransportClient getESClient() {
-		Settings settings = Settings.settingsBuilder().put(EsColumnConstant.CLUSTER_NAME, EsInfo.REMOTE_JEESHOP_RELATION.getClusterName()).build();
+		Settings settings = Settings.settingsBuilder().put(EsColumnConstant.CLUSTER_NAME, EsDBInfo.REMOTE_JEESHOP_RELATION.getClusterName()).build();
 		
 		TransportClient client = TransportClient.builder().settings(settings).build();
 		Map<String, String> addressMap = PropertyFileReadUtil.getAddressMap();

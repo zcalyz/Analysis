@@ -1,13 +1,16 @@
 package com.zc.analysis.model;
 
+import java.io.Serializable;
+
 /**
  * 
  * 用于代表一个事事务
  * @author zhaichen
  *
  */
-public class TransactionModel {
+public class TransactionModel implements Serializable{
 	
+	private static final long serialVersionUID = -5725189651250905742L;
 	/**
 	 * 事务的名称
 	 */
@@ -15,7 +18,7 @@ public class TransactionModel {
 	/**
 	 * 事务的到达率
 	 */
-	private double arriveRate;
+	private Double arriveRate;
 	
 	/**
 	 * 服务时间，单位为纳秒，不包含排队
@@ -26,7 +29,7 @@ public class TransactionModel {
 	 * 驻留时间,单位为秒：服务+排队时间
 	 * @return
 	 */
-	private double residenceTime;
+	private Double residenceTime;
 	
 	/**
 	 * 事务吞吐量
@@ -54,11 +57,11 @@ public class TransactionModel {
 		this.name = name;
 	}
 
-	public double getArriveRate() {
+	public Double getArriveRate() {
 		return arriveRate;
 	}
 
-	public void setArriveRate(double arriveRate) {
+	public void setArriveRate(Double arriveRate) {
 		this.arriveRate = arriveRate;
 	}
 

@@ -19,7 +19,7 @@ import com.zc.util.TypeConvertUtil;
 public class SingleQueueSolverService implements QueueModelSolverService{
 	
 	@Override
-	public void analysisAndSetResult(Station station) {
+	public Station getAnalysisResult(Station station) {
 		List<TransactionModel> transactions = station.getTransactions();	
 		
 		setThroughputAndUtilazation(transactions);
@@ -29,6 +29,7 @@ public class SingleQueueSolverService implements QueueModelSolverService{
 		
 		setQueueLength(transactions);
 		
+		return station;
 	}
 		
 	/**

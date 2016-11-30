@@ -97,7 +97,8 @@ public class EsRetriveModelInputDataService implements RetriveModelInputDataSeri
 		transactionModel.setName(searchHitsInUrlEntry.getKey());
 		
 		// 设置这段时间改请求出现的次数
-		transactionModel.setArriveRate(searchHitsInUrl.size());
+		Integer arrtiveRate = new Integer(searchHitsInUrl.size());
+		transactionModel.setArriveRate(arrtiveRate.doubleValue());
 		// 获取平均服务时间
 		Long averageServiceTime = dataAnalysisService.calAverageServiceTime(searchHitsInUrl);
 		if(averageServiceTime != null){

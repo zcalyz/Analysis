@@ -5,7 +5,7 @@ package com.zc.constant;
  * @author zhaichen
  *
  */
-public enum EsInfo {
+public enum EsDBInfo {
 	REMOTE_JEESHOP_RELATION("Apm", "apm2.0-10.82.81.180-relationship-1", "RelationShip"),
 	LOCAL_DEFAULT("local-elasticsearch", "db_index_date","table_type"),
 	REMOTE_SERVICE_RELATION("Apm", "apm2.0-115.236.12.194-relationship-1", "RelationShip");
@@ -16,7 +16,7 @@ public enum EsInfo {
 	
 	private String type;
 	
-	private EsInfo(String clusterName, String index, String type){
+	private EsDBInfo(String clusterName, String index, String type){
 		this.index = index;
 		this.type = type;
 		this.clusterName = clusterName;

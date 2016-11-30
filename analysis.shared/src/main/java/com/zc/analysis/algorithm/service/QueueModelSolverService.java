@@ -12,8 +12,9 @@ public interface QueueModelSolverService {
 	
 	/**
 	 * 分析并设置分析结果
-	 * @param stations
+	 * @param station
+	 * @return 返回填充完分析结果的Station
 	 */
-	void analysisAndSetResult(Station station);
+	Station getAnalysisResult(Station station);
 	
 }

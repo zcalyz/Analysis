@@ -1,5 +1,6 @@
 package com.zc.analysis.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,8 +9,10 @@ import java.util.List;
  * @author zhaichen
  *
  */
-public class Station {
+public class Station implements Serializable{
 	
+	private static final long serialVersionUID = -2228016908352336877L;
+
 	/**
 	 * 节点名称
 	 */
