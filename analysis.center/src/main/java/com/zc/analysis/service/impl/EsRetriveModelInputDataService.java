@@ -11,22 +11,22 @@ import org.springframework.util.CollectionUtils;
 
 import com.zc.analysis.model.Station;
 import com.zc.analysis.model.TransactionModel;
-import com.zc.common.service.RetriveInputDataSerivce;
-import com.zc.search.dao.EsDataOperateDAO;
-import com.zc.search.dao.impl.SimpleESDataOperateDAOImpl;
+import com.zc.common.service.RetriveModelInputDataSerivce;
+import com.zc.search.dao.DataReadDAO;
+import com.zc.search.dao.impl.ESDataReadDAOImpl;
 import com.zc.search.param.BaseESSearchParam;
 
 /**
- * 获取模型所需输入数据
+ * 获取模型所需输入数据，
  * @author zhaichen
  *
  */
-public class SimpleEsRetriveInputDataService implements RetriveInputDataSerivce{
+public class EsRetriveModelInputDataService implements RetriveModelInputDataSerivce{
 	
 	@Resource(name="simpleESDataOperateDAOImpl")
-	private EsDataOperateDAO  dataOperateDAO = new SimpleESDataOperateDAOImpl();
+	private DataReadDAO  dataOperateDAO = new ESDataReadDAOImpl();
 	
-	private SimpleSourceDataProcessService dataAnalysisService = new SimpleSourceDataProcessService();
+	private EsSourceDataProcessService dataAnalysisService = new EsSourceDataProcessService();
 
 	@Override
 	public List<Station> retriveInputData(BaseESSearchParam searchParam) {

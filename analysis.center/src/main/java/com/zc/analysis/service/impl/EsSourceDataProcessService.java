@@ -13,11 +13,11 @@ import org.springframework.util.StringUtils;
 import com.zc.constant.EsColumnConstant;
 
 /**
- * 简单元数据预处理类
+ * 简单Es元数据预处理类
  * @author zhaichen
  *
  */
-public class SimpleSourceDataProcessService {
+public class EsSourceDataProcessService {
 	
 	/**
 	 * 访问第三方应用所发出的消息

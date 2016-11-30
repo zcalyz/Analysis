@@ -5,7 +5,12 @@ import org.elasticsearch.search.SearchHits;
 import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
 
-public interface EsDataOperateDAO {
+/**
+ * 从指定数据源读取数据
+ * @author zhaichen
+ *
+ */
+public interface DataReadDAO {
 
 	/**
 	 * 根据查询条件查询查询数据

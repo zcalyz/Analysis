@@ -2,17 +2,17 @@ package com.zc.analysis.algorithm.service.impl;
 
 import java.util.List;
 
-import com.zc.analysis.algorithm.service.BaseSolverService;
+import com.zc.analysis.algorithm.service.QueueModelSolverService;
 import com.zc.analysis.model.Station;
 import com.zc.analysis.model.TransactionModel;
 import com.zc.util.TypeConvertUtil;
 
 /**
- * 单队列
+ * 单队列算法模型
  * @author zhaichen
  *
  */
-public class SolverSingleQueueOpenService implements BaseSolverService{
+public class SingleQueueSolverService implements QueueModelSolverService{
 	
 	@Override
 	public void analysisAndSetResult(Station station) {

@@ -26,5 +26,11 @@
 	
 	<bean id="userService" class="com.zc.simple.service.impl.UserServiceImpl"></bean>
 	<!-- test service end-->
-
+	
+	<!-- 获取模型所需服务数据服务  -->
+	<dubbo:service interface="com.zc.common.service.RetriveInputDataSerivce"
+		ref="simpleEsRetriveInputDataService" />
+	
+	<bean id="simpleEsRetriveInputDataService"
+	class="com.zc.analysis.service.impl.SimpleEsRetriveInputDataService" />
 </beans>

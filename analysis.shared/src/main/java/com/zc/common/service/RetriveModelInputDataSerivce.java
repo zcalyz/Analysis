@@ -4,7 +4,12 @@ import java.util.List;
 import com.zc.analysis.model.Station;
 import com.zc.search.param.BaseESSearchParam;
 
-public interface RetriveInputDataSerivce {
+/**
+ * 模型输入数据获取服务
+ * @author zhaichen
+ *
+ */
+public interface RetriveModelInputDataSerivce {
 	
 	/**
 	 * 获取模型所需的输入数据

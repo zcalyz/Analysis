@@ -6,9 +6,9 @@ import org.elasticsearch.search.aggregations.support.ValuesSourceParser.Input;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
-import com.zc.analysis.algorithm.service.impl.SolverSingleQueueOpenService;
+import com.zc.analysis.algorithm.service.impl.SingleQueueSolverService;
 import com.zc.analysis.model.Station;
-import com.zc.analysis.service.impl.SimpleEsRetriveInputDataService;
+import com.zc.analysis.service.impl.EsRetriveModelInputDataService;
 import com.zc.constant.EsInfo;
 import com.zc.search.param.es.SimpleSearchParam;
 import com.zc.util.InputDataChangeUtil;
@@ -18,12 +18,12 @@ public class EsRetriveInputDataServiceTest {
 	
 	@Test
 	public void analysisTest(){
-		SimpleEsRetriveInputDataService inputDataService = new SimpleEsRetriveInputDataService();
+		EsRetriveModelInputDataService inputDataService = new EsRetriveModelInputDataService();
 		// 获取输入数据
 		SimpleSearchParam searchParam = initSimpleSearchParam();
 		List<Station> inputData = inputDataService.retriveInputData(searchParam);
 		
-		SolverSingleQueueOpenService solverService = new SolverSingleQueueOpenService();
+		SingleQueueSolverService solverService = new SingleQueueSolverService();
 		// 输出输入数据
 		PrintSearchHitsResultUtil.printForTableFormat(inputData);
 		// 对数据进行分析

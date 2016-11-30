@@ -3,7 +3,12 @@ package com.zc.analysis.algorithm.service;
 
 import com.zc.analysis.model.Station;
 
-public interface BaseSolverService {
+/**
+ * 队列模型模型解析服务
+ * @author zhaichen
+ *
+ */
+public interface QueueModelSolverService {
 	
 	/**
 	 * 分析并设置分析结果

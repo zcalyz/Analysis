@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import com.zc.constant.AddressConstant;
 import com.zc.constant.EsColumnConstant;
 import com.zc.constant.EsInfo;
-import com.zc.search.dao.EsDataOperateDAO;
+import com.zc.search.dao.DataReadDAO;
 import com.zc.search.param.BaseESInsertParam;
 import com.zc.search.param.BaseESSearchParam;
 import com.zc.search.param.es.SimpleSearchParam;
@@ -28,9 +28,14 @@ import com.zc.search.service.es.impl.SimpleEsQueryServiceExample;
 import com.zc.util.JsonUtil;
 import com.zc.util.PropertyFileReadUtil;
 
-public class SimpleESDataOperateDAOImpl implements EsDataOperateDAO {
+/**
+ * 根据条件在Es中读取数据
+ * @author zhaichen
+ *
+ */
+public class ESDataReadDAOImpl implements DataReadDAO {
 
-	private static Logger logger = LoggerFactory.getLogger(SimpleESDataOperateDAOImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(ESDataReadDAOImpl.class);
 	
 	private SimpleEsQueryServiceExample simpleQueryServiceExample = new SimpleEsQueryServiceExample();
 	

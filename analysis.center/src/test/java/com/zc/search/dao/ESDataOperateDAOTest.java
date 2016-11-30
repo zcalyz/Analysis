@@ -5,7 +5,7 @@ import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
 import com.zc.constant.EsInfo;
-import com.zc.search.dao.impl.SimpleESDataOperateDAOImpl;
+import com.zc.search.dao.impl.ESDataReadDAOImpl;
 import com.zc.search.param.es.SimpleInsertParamExample;
 import com.zc.search.param.es.SimpleSearchParam;
 import com.zc.search.param.es.SimpleSearchParamExample;
@@ -19,7 +19,7 @@ public class ESDataOperateDAOTest {
 	
 	@Test
 	public void insertTest(){
-		SimpleESDataOperateDAOImpl esReader = new SimpleESDataOperateDAOImpl();
+		ESDataReadDAOImpl esReader = new ESDataReadDAOImpl();
 		SimpleInsertParamExample insertParam = new SimpleInsertParamExample();
 		// insert test
 		for(int i = 2; i < 30; i++){
@@ -42,7 +42,7 @@ public class ESDataOperateDAOTest {
 	
 	@Test
 	public void searchTest(){
-		SimpleESDataOperateDAOImpl esReader = new SimpleESDataOperateDAOImpl();
+		ESDataReadDAOImpl esReader = new ESDataReadDAOImpl();
 		
 		SimpleSearchParam simpleSearchParam = new SimpleSearchParam();
 //		SimpleSearchParamExample searchParam = new SimpleSearchParamExample();
