@@ -2,7 +2,7 @@ package com.zc.analysis.algorithm.service.impl;
 
 import java.util.List;
 
-import com.zc.analysis.algorithm.service.BaseSolver;
+import com.zc.analysis.algorithm.service.BaseSolverService;
 import com.zc.analysis.model.Station;
 import com.zc.analysis.model.TransactionModel;
 import com.zc.util.TypeConvertUtil;
@@ -12,7 +12,7 @@ import com.zc.util.TypeConvertUtil;
  * @author zhaichen
  *
  */
-public class SolverSingleQueueOpen implements BaseSolver{
+public class SolverSingleQueueOpenService implements BaseSolverService{
 	
 	@Override
 	public void analysisAndSetResult(Station station) {

@@ -3,7 +3,7 @@ package com.zc.analysis.algorithm.service;
 
 import com.zc.analysis.model.Station;
 
-public interface BaseSolver {
+public interface BaseSolverService {
 	
 	/**
 	 * 分析并设置分析结果

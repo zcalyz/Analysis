@@ -21,7 +21,7 @@ import com.zc.search.param.BaseESSearchParam;
  * @author zhaichen
  *
  */
-public class EsRetriveInputDataService implements RetriveInputDataSerivce{
+public class SimpleEsRetriveInputDataService implements RetriveInputDataSerivce{
 	
 	@Resource(name="simpleESDataOperateDAOImpl")
 	private EsDataOperateDAO  dataOperateDAO = new SimpleESDataOperateDAOImpl();

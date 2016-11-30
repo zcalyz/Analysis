@@ -5,7 +5,7 @@ import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
 import com.zc.analysis.model.Station;
-import com.zc.analysis.service.impl.EsRetriveInputDataService;
+import com.zc.analysis.service.impl.SimpleEsRetriveInputDataService;
 import com.zc.constant.EsInfo;
 import com.zc.search.param.es.SimpleSearchParam;
 import com.zc.util.PrintSearchHitsResultUtil;
@@ -14,7 +14,7 @@ public class EsRetriveInputDataServiceTest {
 	
 	@Test
 	public void analysisTest(){
-		EsRetriveInputDataService inputDataService = new EsRetriveInputDataService();
+		SimpleEsRetriveInputDataService inputDataService = new SimpleEsRetriveInputDataService();
 		
 		SimpleSearchParam searchParam = initSimpleSearchParam();
 		List<Station> inputData = inputDataService.retriveInputData(searchParam);
