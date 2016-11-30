@@ -20,6 +20,17 @@ public class Station {
 	 */
 	private List<TransactionModel> transactions;
 	
+	/**
+	 * 到达率是否递增
+	 * @return
+	 */
+	private boolean whatIf = false;
+	
+	/**
+	 * 要更改的目标到达率，whatIf为true时才使用
+	 */
+	private int targetArrivateRate;
+	
 
 	public String getName() {
 		return name;
@@ -35,6 +46,22 @@ public class Station {
 
 	public void setTransactions(List<TransactionModel> transactions) {
 		this.transactions = transactions;
+	}
+
+	public boolean isWhatIf() {
+		return whatIf;
+	}
+
+	public void setWhatIf(boolean whatIf) {
+		this.whatIf = whatIf;
+	}
+
+	public int getTargetArrivateRate() {
+		return targetArrivateRate;
+	}
+
+	public void setTargetArrivateRate(int targetArrivateRate) {
+		this.targetArrivateRate = targetArrivateRate;
 	}
 	
 }

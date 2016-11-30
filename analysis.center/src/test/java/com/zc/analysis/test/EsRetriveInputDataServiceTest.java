@@ -1,13 +1,17 @@
 package com.zc.analysis.test;
 
 import java.util.List;
+
+import org.elasticsearch.search.aggregations.support.ValuesSourceParser.Input;
 import org.joda.time.LocalDateTime;
 import org.junit.Test;
 
+import com.zc.analysis.algorithm.service.impl.SolverSingleQueueOpenService;
 import com.zc.analysis.model.Station;
 import com.zc.analysis.service.impl.SimpleEsRetriveInputDataService;
 import com.zc.constant.EsInfo;
 import com.zc.search.param.es.SimpleSearchParam;
+import com.zc.util.InputDataChangeUtil;
 import com.zc.util.PrintSearchHitsResultUtil;
 
 public class EsRetriveInputDataServiceTest {
@@ -15,11 +19,22 @@ public class EsRetriveInputDataServiceTest {
 	@Test
 	public void analysisTest(){
 		SimpleEsRetriveInputDataService inputDataService = new SimpleEsRetriveInputDataService();
-		
+		// 获取输入数据
 		SimpleSearchParam searchParam = initSimpleSearchParam();
 		List<Station> inputData = inputDataService.retriveInputData(searchParam);
 		
+		SolverSingleQueueOpenService solverService = new SolverSingleQueueOpenService();
+		// 输出输入数据
 		PrintSearchHitsResultUtil.printForTableFormat(inputData);
+		// 对数据进行分析
+		for(Station station : inputData){
+			if(station.getTransactions().size() > 1){
+				InputDataChangeUtil.changeArriveRate(station, 1);
+				solverService.analysisAndSetResult(station);
+				PrintSearchHitsResultUtil.printAnalysisResult(station);
+			}
+		}
+		
 	}
 	
 	public static SimpleSearchParam initSimpleSearchParam() {
@@ -34,4 +49,5 @@ public class EsRetriveInputDataServiceTest {
 		
 		return searchParam;
 	}
+	
 }

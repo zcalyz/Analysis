@@ -36,7 +36,7 @@ public class SimpleESDataOperateDAOImpl implements EsDataOperateDAO {
 	
 	private SimpleEsQueryService simpleQueryService = new SimpleEsQueryService();
 	
-	private static final int ES_MAX_COUNT = 10000;
+	private static final int ES_MAX_COUNT = 100;
 
 	@Override
 	public SearchHits searchData(BaseESSearchParam searchParam) {

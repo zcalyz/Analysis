@@ -14,7 +14,8 @@
 	<dubbo:application name="simple-provider"></dubbo:application>
 	<dubbo:registry protocol="zookeeper" address="${zookeeper.address}"></dubbo:registry>
 	<dubbo:protocol name="dubbo" port="20880" />
-
+	
+	<!--test service start-->
 	<dubbo:service interface="com.zc.simple.service.OrderService"
 		ref="orderService" />
 
@@ -22,9 +23,8 @@
 
 	<dubbo:service interface="com.zc.simple.service.UserService"
 		ref="userService" />
-
+	
 	<bean id="userService" class="com.zc.simple.service.impl.UserServiceImpl"></bean>
-
-
+	<!-- test service end-->
 
 </beans>

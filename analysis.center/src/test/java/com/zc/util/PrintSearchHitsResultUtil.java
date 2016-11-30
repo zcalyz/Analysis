@@ -37,9 +37,9 @@ public class PrintSearchHitsResultUtil {
 		
 		for(Station station  : inputData){
 			List<TransactionModel> stationData = station.getTransactions();
-			System.out.print(station.getName() + "    ");
-			printColumn(stationData);
-			System.out.print(station.getName() + "    ");
+
+			printColumn(station);
+			
 			for(TransactionModel model : stationData){
 				System.out.print(model.getServiceTime() + "-" + model.getArriveRate() + "    ");
 			}
@@ -47,10 +47,26 @@ public class PrintSearchHitsResultUtil {
 		}
 	}
 	
-	public static void printColumn(List<TransactionModel> transactionModels){
+	public static void printColumn(Station station){
+		System.out.print(station.getName() + "    ");
+		
+		List<TransactionModel> transactionModels = station.getTransactions();
 		for(TransactionModel model : transactionModels){
 			System.out.print(model.getName() + "  ");
 		}
 		System.out.println();
+		
+		System.out.print(station.getName() + "    ");
 	}
+	
+	public static void printAnalysisResult(Station station){
+		System.out.println("\n+++++++++++++++++++result+++++++++++++++++++++\n");
+		List<TransactionModel> transactions = station.getTransactions();
+		
+		printColumn(station);
+		for(TransactionModel model : transactions){
+			System.out.print(model.getResidenceTime() + "-" + model.getUtilazation()+ "—" + model.getQueueLenth());
+		}	
+	}
+
 }

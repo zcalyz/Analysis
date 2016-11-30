@@ -2,7 +2,7 @@ package com.zc.util;
 
 public class TypeConvertUtil {
 	
-	private static final long NANO_TO_SENCOND_STEP = 1000000000L;
+	private static final double NANO_TO_SENCOND_STEP = 1000000000d;
 	
 	/**
 	 * 将纳秒转换为秒
