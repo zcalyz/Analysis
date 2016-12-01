@@ -1,6 +1,7 @@
 package com.zc.analysis.model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * 
@@ -47,7 +48,6 @@ public class TransactionModel implements Serializable{
 	 */
 	private Double queueLenth;
 	
-	
 
 	public String getName() {
 		return name;
@@ -74,6 +74,7 @@ public class TransactionModel implements Serializable{
 	}
 
 	public Double getResidenceTime() {
+//		format.format(re)
 		return residenceTime;
 	}
 

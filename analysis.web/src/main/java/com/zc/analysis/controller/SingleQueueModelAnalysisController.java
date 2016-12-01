@@ -8,13 +8,17 @@ import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zc.analysis.algorithm.service.QueueModelSolverService;
 import com.zc.analysis.model.Station;
+import com.zc.analysis.model.TableAnalysisResultAO;
 import com.zc.common.service.RetriveModelInputDataSerivce;
 import com.zc.constant.EsDBInfo;
 import com.zc.search.param.es.SimpleSearchParam;
+import com.zc.util.InputDataChangeUtil;
+import com.zc.util.TypeConvertUtil;
 
 
 /**
@@ -36,16 +40,22 @@ public class SingleQueueModelAnalysisController {
 	private static Logger logger = LoggerFactory.getLogger(SingleQueueModelAnalysisController.class);
 	
 	@RequestMapping("/display")
-	public String displayAnalysisResult(){
+	public String displayAnalysisResult(Model model){
 		SimpleSearchParam searchParam = initSimpleSearchParam();
 		List<Station> stations = retriveModelInputDataSerivce.retriveInputData(searchParam);
 		
+		TableAnalysisResultAO resultAO = null;
 		for(Station station : stations){
+			InputDataChangeUtil.changeArriveRate(station, 0.1);
 			Station resultStation = queueModelSolverService.getAnalysisResult(station);
-			System.out.println(resultStation);
+			// 获取一个前端模型
+			if(resultStation.getTransactions().size() > 1){
+				resultAO = TypeConvertUtil.transformToTableResult(resultStation);
+			}
 		}
 		
-		return null;
+		model.addAttribute("resultList", resultAO);
+		return "analysis/simpleAnalysis";
 	}
 	
 	
