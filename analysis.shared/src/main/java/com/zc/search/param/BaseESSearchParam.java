@@ -9,6 +9,11 @@ public abstract class BaseESSearchParam implements Serializable{
 	protected String[] indexs;
 	
 	protected String[] types;
+	
+	/**
+	 * 查询的数据量
+	 */
+	protected int size;
 
 	public String[] getIndexs() {
 		return indexs;
@@ -24,6 +29,14 @@ public abstract class BaseESSearchParam implements Serializable{
 
 	public void setTypes(String[] types) {
 		this.types = types;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 	
 }

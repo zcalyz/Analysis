@@ -12,6 +12,7 @@ import com.zc.display.model.EchartSeries;
 import com.zc.display.model.EchartXAxis;
 import com.zc.display.model.StationEchartVO;
 import com.zc.util.JsonUtil;
+import com.zc.util.MockDataUtil;
 
 
 @Controller
@@ -23,26 +24,17 @@ public class EchartAjaxTest {
 	public StationEchartVO getData(Model model){
 		StationEchartVO stationEchartVO = new StationEchartVO();
 		
-		stationEchartVO.setLegend(initSimpleLegend());
+		stationEchartVO.setLegend(MockDataUtil.initSimpleLegend());
 		stationEchartVO.setxAxis(initXAxis());
 		stationEchartVO.addPeformanceDataSeries(initSeries());
 		
 		return stationEchartVO;
 	}
 	
-	public static EchartLegend initSimpleLegend(){
-		EchartLegend legend = new EchartLegend();
-		ArrayList<String> legendData = new ArrayList<String>();
-		legendData.add("real");
-		
-		legend.setData(legendData);
-		
-		return legend;
-	}
 	
 	public static EchartXAxis initXAxis(){
 		EchartXAxis echartXAxis = new EchartXAxis();
-		List<String> xdata = new ArrayList<String>();
+		List<Object> xdata = new ArrayList<Object>();
 		xdata.add("2");
 		xdata.add("10");
 		echartXAxis.setData(xdata);

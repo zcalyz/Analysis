@@ -4,8 +4,9 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import com.zc.analysis.model.Station;
-import com.zc.analysis.model.TableAnalysisResultAO;
+import com.zc.analysis.model.AnalysisResultAO;
 import com.zc.analysis.model.TransactionModel;
+import com.zc.display.model.StationEchartVO;
 
 /**
  * 数据类型转换工具类
@@ -23,8 +24,13 @@ public class TypeConvertUtil {
 	
 	private static final String URL_SPLIT_SIMBOL = "/";
 	
-	public static TableAnalysisResultAO transformToTableResult(Station station){
-		TableAnalysisResultAO resultAO = new TableAnalysisResultAO();
+	/**
+	 * 将station转换为table格式的数据
+	 * @param station
+	 * @return
+	 */
+	public static AnalysisResultAO transformToTableResult(Station station){
+		AnalysisResultAO resultAO = new AnalysisResultAO();
 		
 		String stationName = StringSplitUtil.getLastSplitString(station.getName(), APP_SPLIT_SIMBOL);
 		resultAO.setStationName(stationName);
@@ -38,6 +44,17 @@ public class TypeConvertUtil {
 		}
 		
 		return resultAO;
+	}
+	
+	/**
+	 * 转换为echart类型的展示数据
+	 * @param staton
+	 * @return
+	 */
+	public static StationEchartVO transformToEchartResult(Station staton){
+		
+		
+		return null;
 	}
 	
 	/**

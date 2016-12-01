@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zc.analysis.algorithm.service.QueueModelSolverService;
 import com.zc.analysis.model.Station;
-import com.zc.analysis.model.TableAnalysisResultAO;
+import com.zc.analysis.model.AnalysisResultAO;
 import com.zc.common.service.RetriveModelInputDataSerivce;
 import com.zc.constant.EsDBInfo;
 import com.zc.search.param.es.SimpleSearchParam;
@@ -44,7 +44,7 @@ public class SingleQueueModelAnalysisController {
 		SimpleSearchParam searchParam = initSimpleSearchParam();
 		List<Station> stations = retriveModelInputDataSerivce.retriveInputData(searchParam);
 		
-		TableAnalysisResultAO resultAO = null;
+		AnalysisResultAO resultAO = null;
 		for(Station station : stations){
 			InputDataChangeUtil.changeArriveRate(station, 0.1);
 			Station resultStation = queueModelSolverService.getAnalysisResult(station);

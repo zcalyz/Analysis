@@ -3,11 +3,11 @@ package com.zc.analysis.model;
 import java.util.LinkedList;
 
 /**
- * 分析结果模型，用于前端表格展示
+ * 分析结果模型，用于前端表格展示及简单统计
  * @author zhaichen
  *
  */
-public class TableAnalysisResultAO {
+public class AnalysisResultAO {
 	
 	/**
 	 * 节点名称
@@ -81,6 +81,21 @@ public class TableAnalysisResultAO {
 
 	public void setUtilizations(LinkedList<String> utilizations) {
 		this.utilizations = utilizations;
+	} 
+	
+//	下面是用于统计的方法
+	
+	/**
+	 * 获取驻留时间的总和
+	 * @return
+	 */
+	public Double getTotalResidenceTime(){
+		Double totalTime = 0D;
+		for(String residenceTime : residenceTimes){
+			Double time = Double.valueOf(residenceTime);
+			totalTime = totalTime + time;
+		}
+		return totalTime;
 	}
 	
 }

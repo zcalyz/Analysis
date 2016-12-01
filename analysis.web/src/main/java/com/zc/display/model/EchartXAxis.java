@@ -1,5 +1,6 @@
 package com.zc.display.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class EchartXAxis {
 	/**
 	 * 横坐标轴数据
 	 */
-	private List<String> data;
+	private List<Object> data;
 
 	public String getType() {
 		return type;
@@ -37,12 +38,24 @@ public class EchartXAxis {
 		this.boundaryGap = boundaryGap;
 	}
 
-	public List<String> getData() {
+	
+	public List<Object> getData() {
 		return data;
 	}
 
-	public void setData(List<String> data) {
+	public void setData(List<Object> data) {
 		this.data = data;
+	}
+	
+	/**
+	 * 增加数据
+	 * @param inputData
+	 */
+	public void addAxisData(Object inputData){
+		if(data == null){
+			data = new ArrayList<Object>();
+		}
+		data.add(inputData);
 	}
 	
 }

@@ -21,7 +21,7 @@
 					// 指定图表的配置项和数据
 					option = {
 						title : {
-							text : '响应时间预测情况',
+							text : '响应时间预测',
 						},
 						tooltip : {
 							trigger : 'axis'
@@ -61,7 +61,10 @@
 					myChart.setOption(option);
 
 					myChart.hideLoading();
-					timeId = setInterval("getChartData();", 8000);
+				 	// timeId = setInterval("getChartData();", 8000);
+				 	window.onload=function(){
+				 		getChartData();
+				 	}
 				</script>
 
 				<script type="text/javascript">
@@ -73,7 +76,7 @@
 								.ajax({
 									type : "get",
 									async : false, //同步执行 
-									url : "chart/simple.do",
+									url : "chart/simpleChart.do",
 									data : {},
 									dataType : "json", //返回数据形式为json
 									success : function(result) {
@@ -81,7 +84,6 @@
 											options.legend = result.legend;
 											options.xAxis = result.xAxis;
 											options.series = result.peformanceDataSeries;
-											//alert(options.series[0].data);
 
 											myChart.hideLoading();
 											myChart.setOption(options);

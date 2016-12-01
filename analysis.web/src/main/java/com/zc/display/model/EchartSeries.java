@@ -1,5 +1,6 @@
 package com.zc.display.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.zc.constant.EchartTypeEnum;
@@ -61,6 +62,17 @@ public class EchartSeries {
 
 	public void setData(List<Object> data) {
 		this.data = data;
+	}
+	
+	/**
+	 * 将数据加入到data中
+	 * @param addData
+	 */
+	public void addSeriesData(Object addData){
+		if(data == null){
+			data = new ArrayList<Object>();
+		}
+		data.add(addData);
 	}
 	
 }
