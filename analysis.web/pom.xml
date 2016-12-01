@@ -161,8 +161,8 @@
 			</exclusions>
 		</dependency>
 		<!--Dubbo 相关jar包 -->
-		
-		<!-- 二方库相关依赖  -->
+
+		<!-- 二方库相关依赖 -->
 		<dependency>
 			<groupId>com.zc</groupId>
 			<artifactId>analysis.shared</artifactId>
@@ -182,13 +182,14 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		<!--日志相关jar包 -->
-		
-		<!--  LocalDateTime 使用-->
+
+		<!-- LocalDateTime 使用 -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>2.9.4</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>

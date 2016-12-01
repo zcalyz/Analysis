@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@include file="layout/header.jsp" %>
 
 <body>
@@ -5,7 +7,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<!-- 左边栏 -->
+			<!--  -->
 			<jsp:include page="layout/left_nav.jsp" flush="true"/>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
@@ -15,7 +17,7 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Header</th>
+								<th>中文</th>
 								<th>Header</th>
 								<th>Header</th>
 								<th>Header</th>
