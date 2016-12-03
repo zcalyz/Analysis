@@ -4,16 +4,30 @@
 <%@include file="layout/header.jsp"%>
 <script src="<%=basePath%>js/echart/echarts.min.js"></script>
 
+<!-- 日历插件  -->
+<script src="<%=basePath%>js/datePicker/jquery.date_input.pack.js"></script> 
+<link href="<%=basePath%>css/datePicker/datePicker.css" rel="stylesheet">
+
+
 <body>
 	<jsp:include page="layout/top_nav.jsp" flush="true" />
-
+	
 	<div class="container-fluid">
 		<div class="row">
 			<jsp:include page="layout/left_nav.jsp" flush="true" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">Dashboard</h1>
-				<div id="main" style="width: 800px; height: 400px;"></div>
 
+ 				<div class="input-group">
+					<span class="input-group-addon">startTime</span> 
+					<input type="text" id="datePickerStart" class="form-control" placeholder="点击选择日期"/>
+				    <span class="input-group-addon">endTime</span> 
+				    <input id="datePickerEnd" type="text" class="form-control" placeholder="点击选择日期"/>
+				</div>
+
+				<div id="main" style="width: 800px; height: 400px; margin-top: 20px"></div>
+				
+				<!-- echart 相关js -->
 				<script type="text/javascript">
 					// 基于准备好的dom，初始化echarts实例
 					var myChart = echarts.init(document.getElementById('main'));
@@ -61,10 +75,10 @@
 					myChart.setOption(option);
 
 					myChart.hideLoading();
-				 	// timeId = setInterval("getChartData();", 8000);
-				 	window.onload=function(){
-				 		getChartData();
-				 	}
+					// timeId = setInterval("getChartData();", 8000);
+					/* 			 	window.onload=function(){
+								 		getChartData();
+								 	} */
 				</script>
 
 				<script type="text/javascript">

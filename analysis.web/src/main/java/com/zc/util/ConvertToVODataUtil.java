@@ -9,11 +9,11 @@ import com.zc.analysis.model.TransactionModel;
 import com.zc.display.model.StationEchartVO;
 
 /**
- * 数据类型转换工具类
+ * 将数据转换为前端展示数据
  * @author zhaichen
  *
  */
-public class TypeConvertUtil {
+public class ConvertToVODataUtil {
 	
 	/**
 	 * double类型格式化

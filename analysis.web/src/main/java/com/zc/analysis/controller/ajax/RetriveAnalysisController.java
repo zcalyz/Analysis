@@ -1,14 +1,14 @@
 package com.zc.analysis.controller.ajax;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
-
+import javax.servlet.http.HttpServletRequest;
 import org.joda.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,17 +17,21 @@ import com.zc.analysis.model.AnalysisResultAO;
 import com.zc.analysis.model.Station;
 import com.zc.common.service.RetriveModelInputDataSerivce;
 import com.zc.constant.EsDBInfo;
+import com.zc.constant.VOParamNameConstant;
 import com.zc.display.model.EchartSeries;
 import com.zc.display.model.EchartXAxis;
 import com.zc.display.model.StationEchartVO;
 import com.zc.search.param.es.SimpleSearchParam;
 import com.zc.util.InputDataChangeUtil;
 import com.zc.util.MockDataUtil;
-import com.zc.util.TypeConvertUtil;
+import com.zc.util.ThreadLocalDateUtil;
+import com.zc.util.ConvertToVODataUtil;
 
 @Controller
 @RequestMapping("/chart")
 public class RetriveAnalysisController {
+	
+	private static Logger logger = LoggerFactory.getLogger(RetriveAnalysisController.class);
 	
 	@Resource(name = "retriveModelInputDataSerivce")
 	private RetriveModelInputDataSerivce retriveModelInputDataSerivce;
@@ -37,11 +41,19 @@ public class RetriveAnalysisController {
 	
 	@RequestMapping("/simpleChart.do")
 	@ResponseBody
-	public StationEchartVO getAnalysis(Model model){
+	public StationEchartVO getAnalysisDate(HttpServletRequest request){
 		
 		SimpleSearchParam searchParam = initSimpleSearchParam();
-		List<Station> stations = retriveModelInputDataSerivce.retriveInputData(searchParam);
 		
+		// 获取日期参数
+		Date startTime = getStartTime(request);
+		Date endTime = getEndTime(request);
+		if(startTime != null && endTime != null){
+			searchParam.setStartTime(startTime);
+			searchParam.setEndTime(endTime);
+		}
+		
+		List<Station> stations = retriveModelInputDataSerivce.retriveInputData(searchParam);	
 		StationEchartVO echartDate = null;
 		for(Station station : stations){
 			if(station.getTransactions().size() > 1){
@@ -63,7 +75,7 @@ public class RetriveAnalysisController {
 			InputDataChangeUtil.changeArriveRate(station, arrivate);
 			Station resultStation = queueModelSolverService.getAnalysisResult(station);
 			
-			AnalysisResultAO stationAO = TypeConvertUtil.transformToTableResult(resultStation);
+			AnalysisResultAO stationAO = ConvertToVODataUtil.transformToTableResult(resultStation);
 			if(stationAO.getTotalResidenceTime() <= 0){
 				break;
 			}
@@ -76,6 +88,26 @@ public class RetriveAnalysisController {
 		stationEchartVO.setLegend(MockDataUtil.initSimpleLegend());
 		
 		return stationEchartVO;
+	}
+	
+	/**
+	 * 获取Date类型的开始时间
+	 * @param request
+	 * @return
+	 */
+	private Date getStartTime(HttpServletRequest request){
+		String startTime = request.getParameter(VOParamNameConstant.START_TIME);
+		return ThreadLocalDateUtil.parse(startTime);
+	}
+	
+	/**
+	 * 获取Date类型的结束时间
+	 * @param request
+	 * @return
+	 */
+	private Date getEndTime(HttpServletRequest request){
+		String endTime = request.getParameter(VOParamNameConstant.END_TIME);
+		return ThreadLocalDateUtil.parse(endTime);
 	}
 	
 	public SimpleSearchParam initSimpleSearchParam() {

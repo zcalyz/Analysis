@@ -18,7 +18,7 @@ import com.zc.common.service.RetriveModelInputDataSerivce;
 import com.zc.constant.EsDBInfo;
 import com.zc.search.param.es.SimpleSearchParam;
 import com.zc.util.InputDataChangeUtil;
-import com.zc.util.TypeConvertUtil;
+import com.zc.util.ConvertToVODataUtil;
 
 
 /**
@@ -50,7 +50,7 @@ public class SingleQueueModelAnalysisController {
 			Station resultStation = queueModelSolverService.getAnalysisResult(station);
 			// 获取一个前端模型
 			if(resultStation.getTransactions().size() > 1){
-				resultAO = TypeConvertUtil.transformToTableResult(resultStation);
+				resultAO = ConvertToVODataUtil.transformToTableResult(resultStation);
 			}
 		}
 		
