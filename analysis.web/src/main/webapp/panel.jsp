@@ -49,15 +49,16 @@
 
 				<script type="text/javascript">
 					$('.form_datetime').datetimepicker({
-						format : 'yyyy-mm-dd hh:ii:ss',
+						format : 'yyyy-mm-dd hh:ii:ss', //日期格式
 						language : 'zh-CN',
 						weekStart : 1,
-						todayBtn : 1,
+						todayBtn : 1, // 是否有今天的按钮
 						autoclose : 1,
 						todayHighlight : 1,
 						startView : 2,
 						forceParse : 0,
-						showMeridian : 1
+						showMeridian : 1, // 区分上午、下午
+						minuteStep : 5 // 分钟间隔
 					});
 				</script>
 
