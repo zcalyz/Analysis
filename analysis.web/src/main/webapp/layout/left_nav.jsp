@@ -2,7 +2,7 @@
 <div class="col-sm-3 col-md-2 sidebar">
 	<ul class="nav nav-sidebar">
 		<li id="li_main" class="active"><a href="main.jsp?active_li=li_main">Overview</a></li>
-		<li id="li_panel"><a href="panel.jsp?active_li=li_panel">panel</a></li>
+		<li id="li_panel"><a href="panel.jsp?active_li=li_panel">chart</a></li>
 		<li><a href="#">Analytics</a></li>
 		<li><a href="#">Export</a></li>
 	</ul>
