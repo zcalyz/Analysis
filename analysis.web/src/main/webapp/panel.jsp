@@ -24,7 +24,7 @@
 				<span class="input-group-addon">startTime</span> 
 					<div class="date form_datetime"
 								data-date="2016-11-16T05:25:07Z"
-								data-date-format="yyyy-mm-dd HH:mm:ss"
+								data-date-format="yyyy-mm-dd HH:ii"
 								data-link-field="dtp_input1">
 
 						<input type="text" id="startTime" name="startTime" class="form-control" placeholder="点击选择日期"/>
@@ -34,7 +34,7 @@
 				    <span class="input-group-addon">endTime</span> 
 				    <div class="date form_datetime"
 								data-date="2016-12-16T05:25:07Z"
-								data-date-format="yyyy-mm-dd HH:mm:ss"
+								data-date-format="yyyy-mm-dd hh:ii:ss"
 								data-link-field="dtp_input1">
 
 						 <input id="endTime"  name="endTime" type="text" class="form-control" placeholder="点击选择日期"/>
@@ -49,6 +49,7 @@
 
 				<script type="text/javascript">
 					$('.form_datetime').datetimepicker({
+						format : 'yyyy-mm-dd hh:ii:ss',
 						language : 'zh-CN',
 						weekStart : 1,
 						todayBtn : 1,
@@ -57,27 +58,6 @@
 						startView : 2,
 						forceParse : 0,
 						showMeridian : 1
-					});
-					$('.form_date').datetimepicker({
-						language : 'zh-CN',
-						weekStart : 1,
-						todayBtn : 1,
-						autoclose : 1,
-						todayHighlight : 1,
-						startView : 2,
-						minView : 2,
-						forceParse : 0
-					});
-					$('.form_time').datetimepicker({
-						language : 'zh-CN',
-						weekStart : 1,
-						todayBtn : 1,
-						autoclose : 1,
-						todayHighlight : 1,
-						startView : 1,
-						minView : 0,
-						maxView : 1,
-						forceParse : 0
 					});
 				</script>
 
@@ -148,9 +128,9 @@
 					// 1. 定时任务
 					// timeId = setInterval("getChartData();", 8000);
 					// 2. 刚载入时调用
-					/* 	window.onload=function(){
+						window.onload=function(){
 						getChartData();
-					} */
+					  }
 					
 					/* 获取分析数据 */
 					function getChartData(startTime,endTime) {

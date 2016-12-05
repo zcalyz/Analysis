@@ -29,7 +29,7 @@
 	
 	<!-- 用于获取模型所需输入数据  -->
 	<dubbo:service interface="com.zc.common.service.RetriveModelInputDataSerivce"
-		ref="esRetriveModelInputDataService" timeout="6000"/>
+		ref="esRetriveModelInputDataService" timeout="10000"/>
 	<!-- 模型解析算法服务  -->
 	<dubbo:service interface="com.zc.analysis.algorithm.service.QueueModelSolverService"
 		ref="singleQueueSolverService" timeout="6000"/>

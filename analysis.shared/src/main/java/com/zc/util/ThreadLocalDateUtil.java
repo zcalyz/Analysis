@@ -32,19 +32,26 @@ public class ThreadLocalDateUtil {
 	 * @return
 	 */
 	public static String formatDate(Date date){
+		if(date == null){
+			return null;
+		}
 		return getDateFormat().format(date);
 	}
 	
 	/**
 	 * 获取Date类型
-	 * @param strDate
+	 * @param stringDate
 	 * @return
 	 * @throws ParseException
 	 */
-	public static Date parse(String strDate) {
+	public static Date parse(String stringDate) {
+		if(StringUtils.isEmpty(stringDate)){
+			return null;
+		}
+		
 		Date formatDate = null;
 		try {
-			formatDate = getDateFormat().parse(strDate);
+			formatDate = getDateFormat().parse(stringDate);
 		} catch (ParseException e) {
 			return null;
 		}
