@@ -16,10 +16,12 @@ import com.zc.analysis.algorithm.service.QueueModelSolverService;
 import com.zc.analysis.model.AnalysisResultAO;
 import com.zc.analysis.model.Station;
 import com.zc.common.service.RetriveModelInputDataSerivce;
+import com.zc.constant.EchartConstants;
 import com.zc.constant.EsDBInfo;
 import com.zc.constant.VOParamNameConstant;
 import com.zc.display.model.EchartSeries;
 import com.zc.display.model.EchartXAxis;
+import com.zc.display.model.EchartYAxis;
 import com.zc.display.model.StationEchartVO;
 import com.zc.search.param.es.SimpleSearchParam;
 import com.zc.util.InputDataChangeUtil;
@@ -71,17 +73,22 @@ public class RetriveAnalysisController {
 		
 		EchartXAxis xAxis = new EchartXAxis();
 		EchartSeries echartSeries = new EchartSeries();
-		for(Double arrivate = 0.1; ; arrivate+=0.7){
-			InputDataChangeUtil.changeArriveRate(station, arrivate);
+		echartSeries.setName(EchartConstants.LEGEND_PREDICT_TIME);
+		for(Double arrivateRate = 0.10; ; arrivateRate+=0.70){
+			InputDataChangeUtil.changeArriveRate(station, arrivateRate);
 			Station resultStation = queueModelSolverService.getAnalysisResult(station);
 			
 			AnalysisResultAO stationAO = ConvertToVODataUtil.transformToTableResult(resultStation);
 			if(stationAO.getTotalResidenceTime() <= 0){
 				break;
 			}
-			xAxis.addAxisData(arrivate);
+			xAxis.addAxisData(ConvertToVODataUtil.arrivateRateFormat(arrivateRate));
 			echartSeries.addSeriesData(stationAO.getTotalResidenceTime());
 		}
+		
+		EchartYAxis yAxis = new EchartYAxis();
+		yAxis.setName(EchartConstants.Y_RESPONSE_TIME);
+		stationEchartVO.setyAxis(yAxis);
 		
 		stationEchartVO.setxAxis(xAxis);
 		stationEchartVO.addPeformanceDataSeries(echartSeries);

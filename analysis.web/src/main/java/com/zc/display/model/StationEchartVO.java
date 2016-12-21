@@ -19,6 +19,8 @@ public class StationEchartVO {
 	
 	private EchartXAxis xAxis;
 	
+	private EchartYAxis yAxis;
+	
 	/**
 	 * 存储要展示的性能数据
 	 */
@@ -56,6 +58,14 @@ public class StationEchartVO {
 		this.peformanceDataSeries = peformanceDataSeries;
 	}
 	
+	public EchartYAxis getyAxis() {
+		return yAxis;
+	}
+
+	public void setyAxis(EchartYAxis yAxis) {
+		this.yAxis = yAxis;
+	}
+
 	public void addPeformanceDataSeries(EchartSeries series){
 		if(peformanceDataSeries == null){
 			peformanceDataSeries = new ArrayList<EchartSeries>();

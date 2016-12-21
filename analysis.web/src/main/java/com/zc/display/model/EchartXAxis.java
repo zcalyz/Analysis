@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class EchartXAxis {
 	
+	private String name = "到达率/s";
+	
 	private String type = "category";
 	
 	/**
@@ -47,6 +49,14 @@ public class EchartXAxis {
 		this.data = data;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	/**
 	 * 增加数据
 	 * @param inputData

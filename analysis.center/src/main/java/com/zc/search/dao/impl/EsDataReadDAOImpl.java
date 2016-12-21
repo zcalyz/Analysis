@@ -46,11 +46,12 @@ public class EsDataReadDAOImpl implements DataReadDAO {
 
 	@Override
 	public SearchHits searchData(BaseESSearchParam searchParam) {
-
+		// 获取查询客户端
 		TransportClient esClient = getESClient();
 		SearchRequestBuilder searchRequest = initBaseSearchQuery(esClient, searchParam);
 		
-		SimpleSearchParam simpleSearchParam = (SimpleSearchParam) searchParam; 
+		SimpleSearchParam simpleSearchParam = (SimpleSearchParam) searchParam;
+		// 增加查询条件
 		simpleQueryService.addRangeQueryForTimestamp(searchRequest, simpleSearchParam);
 //		simpleQueryService.addTermQueryForDstType(searchRequest, simpleSearchParam);
 
@@ -82,7 +83,7 @@ public class EsDataReadDAOImpl implements DataReadDAO {
 		
 		TransportClient client = TransportClient.builder().settings(settings).build();
 		Map<String, String> addressMap = PropertyFileReadUtil.getAddressMap();
-
+		// 获取配置在文件中的集群的地址，多个地址以逗号隔开
 		String[] addressArray = addressMap.get(AddressConstant.ES_REMOTE_ADDRESS).split(",");
 
 		for (String address : addressArray) {

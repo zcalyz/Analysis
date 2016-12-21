@@ -120,6 +120,7 @@ public class SolverMultiOpen extends SolverMulti {
 
 			}
 		}
+	
 
 		for (int j = 0; j < stations; j++) {
 			for (int i = 0; i < classes; i++) {

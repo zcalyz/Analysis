@@ -72,7 +72,7 @@
 					// 指定图表的配置项和数据
 					option = {
 						title : {
-							text : '响应时间预测',
+							text : '性能预测',
 						},
 						tooltip : {
 							trigger : 'axis'
@@ -138,8 +138,7 @@
 						//获得图表的options对象 ;
 						var options = myChart.getOption();
 						//通过Ajax获取数据 
-						$
-								.ajax({
+						$.ajax({
 									type : "post",
 									async : true, //false 同步执行 
 									url : "chart/simpleChart.do",
@@ -150,6 +149,7 @@
 											options.legend = result.legend;
 											options.xAxis = result.xAxis;
 											options.series = result.peformanceDataSeries;
+											options.yAxis = result.yAxis;
 
 											myChart.hideLoading();
 											myChart.setOption(options);

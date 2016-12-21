@@ -21,7 +21,7 @@ public class SingleQueueSolverService implements QueueModelSolverService{
 	@Override
 	public Station getAnalysisResult(Station station) {
 		List<TransactionModel> transactions = station.getTransactions();	
-		
+		// 计算所有请求的吞吐量及利用率
 		setThroughputAndUtilazation(transactions);
 		
 		double totalUtilization = getTotalUtilization(transactions);

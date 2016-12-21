@@ -20,6 +20,8 @@ public class ConvertToVODataUtil {
 	 */
 	private static DecimalFormat doubleFormat = new DecimalFormat("0.00000");
 	
+	private static DecimalFormat arrivateRateFormat = new DecimalFormat("0.00");
+	
 	private static final String APP_SPLIT_SIMBOL = "@";
 	
 	private static final String URL_SPLIT_SIMBOL = "/";
@@ -44,6 +46,10 @@ public class ConvertToVODataUtil {
 		}
 		
 		return resultAO;
+	}
+	
+	public static String arrivateRateFormat(double arrivateRate){
+		return arrivateRateFormat.format(arrivateRate);
 	}
 	
 	/**
@@ -71,4 +77,5 @@ public class ConvertToVODataUtil {
 	private static String getFormatTransactionName(String transactionName){
 		return StringSplitUtil.getLastSplitString(transactionName, URL_SPLIT_SIMBOL);
 	}
+	
 }
