@@ -9,7 +9,11 @@ public class ThreadLocalDateUtil {
 	
 	private static final String date_format = "yyyy-MM-dd HH:mm:ss";
 	
+	private static final String hour_format = "HH:mm";
+	
 	private static ThreadLocal<DateFormat> threadLocalDate = new ThreadLocal<DateFormat>();
+	
+	private static ThreadLocal<DateFormat> threadLocalHour = new ThreadLocal<DateFormat>();
 	
 	/**
 	 * 获取线程安全的simpleDateFormat
@@ -56,5 +60,20 @@ public class ThreadLocalDateUtil {
 			return null;
 		}
 		return formatDate;
+	}
+	
+	/**
+	 * HH:mm的DateFormat
+	 * @return
+	 */
+	public static DateFormat getHourFormat() {
+		DateFormat dateFormat = threadLocalHour.get();
+
+		if (dateFormat == null) {
+			dateFormat = new SimpleDateFormat(hour_format);
+			threadLocalHour.set(dateFormat);
+		}
+
+		return dateFormat;
 	}
 }

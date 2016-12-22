@@ -1,4 +1,4 @@
-package com.zc.util;
+package com.zc.util.mock;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -6,8 +6,9 @@ import java.util.Random;
 import com.zc.constant.EchartConstants;
 import com.zc.display.model.EchartLegend;
 import com.zc.display.model.EchartSeries;
+import com.zc.display.model.EchartTitle;
 
-public class MockDataUtil {
+public class BottleNeckMockDataUtil {
 	
 	/**
 	 * 最大误差
@@ -62,4 +63,5 @@ public class MockDataUtil {
 		
 		return similarData;
 	}
+	
 }

@@ -1,11 +1,8 @@
 package com.zc.analysis.controller.ajax;
 
-import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,27 +14,27 @@ import com.zc.analysis.model.AnalysisResultAO;
 import com.zc.analysis.model.Station;
 import com.zc.common.service.RetriveModelInputDataSerivce;
 import com.zc.constant.EchartConstants;
-import com.zc.constant.EsDBInfo;
-import com.zc.constant.VOParamNameConstant;
 import com.zc.display.model.EchartSeries;
 import com.zc.display.model.EchartTitle;
 import com.zc.display.model.EchartXAxis;
 import com.zc.display.model.EchartYAxis;
 import com.zc.display.model.StationEchartVO;
-import com.zc.search.param.es.SimpleSearchParam;
 import com.zc.util.InputDataChangeUtil;
-import com.zc.util.ThreadLocalDateUtil;
 import com.zc.util.mock.BottleNeckMockDataUtil;
+import com.zc.util.mock.UtilazationMockDataUtil;
 import com.zc.util.ConvertToVODataUtil;
-import com.zc.util.DataCalculateUtil;
 import com.zc.util.DataChangeUtil;
-import com.zc.util.DoubleFormatUtil;
 
+/**
+ * 获取利用率相关数据
+ * @author zhaichen
+ *
+ */
 @Controller
 @RequestMapping("/chart")
-public class RetriveAnalysisController {
+public class RetriveUtilazationController {
 	
-	private static Logger logger = LoggerFactory.getLogger(RetriveAnalysisController.class);
+	private static Logger logger = LoggerFactory.getLogger(RetriveUtilazationController.class);
 	
 	@Resource(name = "retriveModelInputDataSerivce")
 	private RetriveModelInputDataSerivce retriveModelInputDataSerivce;
@@ -45,31 +42,22 @@ public class RetriveAnalysisController {
 	@Resource(name = "queueModelSolverService")
 	private QueueModelSolverService queueModelSolverService;
 	
-	@RequestMapping("/simpleChart.do")
+	@RequestMapping("/utilazation.do")
 	@ResponseBody
 	public StationEchartVO getAnalysisDate(HttpServletRequest request){
 		
-		SimpleSearchParam searchParam = initSimpleSearchParam();
+		StationEchartVO stationEchartVO = new StationEchartVO();
+		stationEchartVO.setTitle(UtilazationMockDataUtil.getEchartTitle());
+		stationEchartVO.setLegend(UtilazationMockDataUtil.getEchartLegend());
 		
-		// 获取日期参数
-		Date startTime = getStartTime(request);
-		Date endTime = getEndTime(request);
-		if(startTime != null && endTime != null){
-			searchParam.setStartTime(startTime);
-			searchParam.setEndTime(endTime);
-		}
+		stationEchartVO.addPeformanceDataSeries(UtilazationMockDataUtil.getCPUSeries());
+		stationEchartVO.addPeformanceDataSeries(UtilazationMockDataUtil.getIOSeries());
 		
-		List<Station> stations = retriveModelInputDataSerivce.retriveInputData(searchParam);	
-		StationEchartVO echartDate = null;
-		for(Station station : stations){
-			if(station.getTransactions().size() > 1){
-				echartDate = getEchartDate(station);
-				break;
-			}
-
-		}
+		stationEchartVO.setyAxis(UtilazationMockDataUtil.getYAxis());
+		stationEchartVO.setxAxis(UtilazationMockDataUtil.getXAxis(stationEchartVO.getPeformanceDataSeries().get(0)));
 		
-		return echartDate;
+		
+		return stationEchartVO;
 	}
 	
 	/**
@@ -111,7 +99,7 @@ public class RetriveAnalysisController {
 		// 设置标题
 		EchartTitle echartTitle = ConvertToVODataUtil.getEchartTile(station.getName());
 		// 计算并计算结果误差，放在副标题处
-		setDeviation(echartTitle, stationEchartVO.getPeformanceDataSeries());
+//		setDeviation(echartTitle, stationEchartVO.getPeformanceDataSeries());
 		stationEchartVO.setTitle(echartTitle);
 		
 		// 扩大到达率，用于展示效果
@@ -120,41 +108,6 @@ public class RetriveAnalysisController {
 		return stationEchartVO;
 	}
 	
-	/**
-	 * 获取Date类型的开始时间
-	 * @param request
-	 * @return
-	 */
-	private Date getStartTime(HttpServletRequest request){
-		String startTime = request.getParameter(VOParamNameConstant.START_TIME);
-		return ThreadLocalDateUtil.parse(startTime);
-	}
-	
-	/**
-	 * 获取Date类型的结束时间
-	 * @param request
-	 * @return
-	 */
-	private Date getEndTime(HttpServletRequest request){
-		String endTime = request.getParameter(VOParamNameConstant.END_TIME);
-		return ThreadLocalDateUtil.parse(endTime);
-	}
-	
-	public void setDeviation(EchartTitle echartTitle, List<EchartSeries> echartSeries){
-		Double deviation = DataCalculateUtil.calculateDeviation(echartSeries);
-		echartTitle.setSubtext(DoubleFormatUtil.formatToPercentage(deviation));
-	}
-	
-	public SimpleSearchParam initSimpleSearchParam() {
-		SimpleSearchParam searchParam = new SimpleSearchParam();
-		searchParam.setIndexs(new String[] { EsDBInfo.REMOTE_SERVICE_RELATION.getIndex() });
-		searchParam.setTypes(new String[] {EsDBInfo.REMOTE_SERVICE_RELATION.getType()});;
-		
-		LocalDateTime startTime = new LocalDateTime(2016, 11, 29, 8, 2);
-		LocalDateTime endTime = new LocalDateTime(2016, 11, 29, 10, 5);
-		searchParam.setStartTime(startTime.toDate());
-		searchParam.setEndTime(endTime.toDate());
-		
-		return searchParam;
-	}
+
+
 }

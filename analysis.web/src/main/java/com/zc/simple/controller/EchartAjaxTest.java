@@ -12,7 +12,7 @@ import com.zc.display.model.EchartSeries;
 import com.zc.display.model.EchartXAxis;
 import com.zc.display.model.StationEchartVO;
 import com.zc.util.JsonUtil;
-import com.zc.util.MockDataUtil;
+import com.zc.util.mock.BottleNeckMockDataUtil;
 
 
 @Controller
@@ -24,7 +24,7 @@ public class EchartAjaxTest {
 	public StationEchartVO getData(Model model){
 		StationEchartVO stationEchartVO = new StationEchartVO();
 		
-		stationEchartVO.setLegend(MockDataUtil.initSimpleLegend());
+		stationEchartVO.setLegend(BottleNeckMockDataUtil.initSimpleLegend());
 		stationEchartVO.setxAxis(initXAxis());
 		stationEchartVO.addPeformanceDataSeries(initSeries());
 		

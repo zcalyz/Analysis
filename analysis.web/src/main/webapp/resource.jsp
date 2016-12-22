@@ -21,6 +21,9 @@
 				<h1 class="page-header">硬件资源利用率</h1>
 				
 				<div class="input-group ">
+					<span class="input-group-addon">station</span> 
+						<input type="text" class="form-control" placeholder="10.10.10.12:8080"/>
+
 				<span class="input-group-addon">startTime</span> 
 					<div class="date form_datetime"
 								data-date="2016-11-16T05:25:07Z"
@@ -95,7 +98,7 @@
 						xAxis : {
 							type : 'category',
 							boundaryGap : false,
-							data : [ '1', '5', '10', '15', '20', '25', '30' ]
+							data : []
 						},
 						yAxis : {
 							type : 'value'
@@ -104,7 +107,7 @@
 							name : '预测',
 							type : 'line',
 							smooth : true,
-							data : [ 10, 12, 21, 54, 260, 830, 840 ]
+							data : [ ]
 						}, ]
 					};
 
@@ -141,7 +144,7 @@
 						$.ajax({
 									type : "post",
 									async : true, //false 同步执行 
-									url : "chart/simpleChart.do",
+									url : "chart/utilazation.do",
 									data : {"startTime":startTime,"endTime":endTime},
 									dataType : "json", //返回数据形式为json
 									success : function(result) {
