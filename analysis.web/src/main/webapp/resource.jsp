@@ -18,7 +18,7 @@
 		<div class="row">
 			<jsp:include page="layout/left_nav.jsp" flush="true" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">瓶颈识别</h1>
+				<h1 class="page-header">硬件资源利用率</h1>
 				
 				<div class="input-group ">
 				<span class="input-group-addon">startTime</span> 

@@ -3,6 +3,7 @@ package com.zc.analysis.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
@@ -40,7 +41,7 @@ public class SingleQueueModelAnalysisController {
 	private static Logger logger = LoggerFactory.getLogger(SingleQueueModelAnalysisController.class);
 	
 	@RequestMapping("/display")
-	public String displayAnalysisResult(Model model){
+	public String displayAnalysisResult(HttpServletRequest request, Model model){
 		SimpleSearchParam searchParam = initSimpleSearchParam();
 		List<Station> stations = retriveModelInputDataSerivce.retriveInputData(searchParam);
 		

@@ -20,6 +20,7 @@ import com.zc.constant.EchartConstants;
 import com.zc.constant.EsDBInfo;
 import com.zc.constant.VOParamNameConstant;
 import com.zc.display.model.EchartSeries;
+import com.zc.display.model.EchartTitle;
 import com.zc.display.model.EchartXAxis;
 import com.zc.display.model.EchartYAxis;
 import com.zc.display.model.StationEchartVO;
@@ -28,6 +29,9 @@ import com.zc.util.InputDataChangeUtil;
 import com.zc.util.MockDataUtil;
 import com.zc.util.ThreadLocalDateUtil;
 import com.zc.util.ConvertToVODataUtil;
+import com.zc.util.DataCalculateUtil;
+import com.zc.util.DataChangeUtil;
+import com.zc.util.DoubleFormatUtil;
 
 @Controller
 @RequestMapping("/chart")
@@ -68,13 +72,18 @@ public class RetriveAnalysisController {
 		return echartDate;
 	}
 	
+	/**
+	 * 根据结果数据Station,获取echart展示数据
+	 * @param station
+	 * @return
+	 */
 	public StationEchartVO getEchartDate(Station station){
 		StationEchartVO stationEchartVO = new StationEchartVO();
 		
 		EchartXAxis xAxis = new EchartXAxis();
 		EchartSeries echartSeries = new EchartSeries();
 		echartSeries.setName(EchartConstants.LEGEND_PREDICT_TIME);
-		for(Double arrivateRate = 0.10; ; arrivateRate+=0.70){
+		for(Double arrivateRate = 0.10; ; arrivateRate+=0.30){
 			InputDataChangeUtil.changeArriveRate(station, arrivateRate);
 			Station resultStation = queueModelSolverService.getAnalysisResult(station);
 			
@@ -89,10 +98,24 @@ public class RetriveAnalysisController {
 		EchartYAxis yAxis = new EchartYAxis();
 		yAxis.setName(EchartConstants.Y_RESPONSE_TIME);
 		stationEchartVO.setyAxis(yAxis);
-		
+		// 设置横轴数据
 		stationEchartVO.setxAxis(xAxis);
+		// 设置预测数据
 		stationEchartVO.addPeformanceDataSeries(echartSeries);
+		// 设置模拟产生的真实数据
+		EchartSeries realData = MockDataUtil.mockRealBottlneckData(echartSeries);
+		stationEchartVO.addPeformanceDataSeries(realData);
+		
 		stationEchartVO.setLegend(MockDataUtil.initSimpleLegend());
+		
+		// 设置标题
+		EchartTitle echartTitle = ConvertToVODataUtil.getEchartTile(station.getName());
+		// 计算并计算结果误差，放在副标题处
+		setDeviation(echartTitle, stationEchartVO.getPeformanceDataSeries());
+		stationEchartVO.setTitle(echartTitle);
+		
+		// 扩大到达率，用于展示效果
+		DataChangeUtil.arrivateRateMultiple(stationEchartVO, 4);
 		
 		return stationEchartVO;
 	}
@@ -115,6 +138,11 @@ public class RetriveAnalysisController {
 	private Date getEndTime(HttpServletRequest request){
 		String endTime = request.getParameter(VOParamNameConstant.END_TIME);
 		return ThreadLocalDateUtil.parse(endTime);
+	}
+	
+	public void setDeviation(EchartTitle echartTitle, List<EchartSeries> echartSeries){
+		Double deviation = DataCalculateUtil.calculateDeviation(echartSeries);
+		echartTitle.setSubtext(DoubleFormatUtil.formatToPercentage(deviation));
 	}
 	
 	public SimpleSearchParam initSimpleSearchParam() {
